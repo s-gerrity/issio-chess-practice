@@ -448,7 +448,7 @@ class Rook extends Piece {
 // Setting Up the Board: START
 const board = new Board();
 // White Pawn on B4
-board.setPiece(new Pawn('white'), 'b', 4);
+board.setPiece(new Pawn('white'), 'a', 5);
 // White Pawn on E4
 board.setPiece(new Pawn('white'), 'e', 4);
 // White Bishop on C3
@@ -461,23 +461,23 @@ board.setPiece(new Rook('black'), 'e', 6);
 
 
 
-// Moves for the White Bishop
-// Bishops only move diagonally
-console.assert(board.makeMove(['c', 3], ['e', 1]), 'Success'); // would output nothing since it is a success
-console.assert(board.makeMove(['c', 3], ['f', 6]), 'Success'); // would output nothing since it is a success
+// // Moves for the White Bishop
+// // Bishops only move diagonally
+// console.assert(board.makeMove(['c', 3], ['e', 1]), 'Success'); // would output nothing since it is a success
+// console.assert(board.makeMove(['c', 3], ['f', 6]), 'Success'); // would output nothing since it is a success
 
-console.assert(board.makeMove(['c', 3], ['h', 5]), 'Fail - Illegal move bishops in general');
-console.assert(board.makeMove(['c', 3], ['b', 4]), 'Fail - Illegal move (white pawn on the way)');
-console.assert(board.makeMove(['c', 3], ['h', 8]), 'Fail - Illegal move (cannot jump over other pieces)');
+// console.assert(board.makeMove(['c', 3], ['h', 5]), 'Fail - Illegal move bishops in general');
+// console.assert(board.makeMove(['c', 3], ['b', 4]), 'Fail - Illegal move (white pawn on the way)');
+// console.assert(board.makeMove(['c', 3], ['h', 8]), 'Fail - Illegal move (cannot jump over other pieces)');
 
-// // Moves for the Black Rook
-// // Rooks moving only vertically or horizontally
-console.assert(board.makeMove(['e', 6], ['a', 6]), 'Success'); // would output nothing since it is a success
-console.assert(board.makeMove(['e', 6], ['e', 4]), 'Success'); // would output nothing since it is a success
+// // // Moves for the Black Rook
+// // // Rooks moving only vertically or horizontally
+// console.assert(board.makeMove(['e', 6], ['a', 6]), 'Success'); // would output nothing since it is a success
+// console.assert(board.makeMove(['e', 6], ['e', 4]), 'Success'); // would output nothing since it is a success
 
-console.assert(board.makeMove(['e', 6], ['c', 5]), 'Fail - Illegal move rooks in general')
-console.assert(board.makeMove(['e', 6], ['f', 6]), 'Fail - Illegal move (black pawn on the way)');
-console.assert(board.makeMove(['e', 6], ['e', 1]), 'Fail - Illegal move (cannot jump over other pieces)')
+// console.assert(board.makeMove(['e', 6], ['c', 5]), 'Fail - Illegal move rooks in general')
+// console.assert(board.makeMove(['e', 6], ['f', 6]), 'Fail - Illegal move (black pawn on the way)');
+// console.assert(board.makeMove(['e', 6], ['e', 1]), 'Fail - Illegal move (cannot jump over other pieces)');
 
 
 function runTest(testValue, expectedResult, description) {
@@ -489,5 +489,23 @@ function runTest(testValue, expectedResult, description) {
   }
 };
 
-runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move');
-runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move');
+runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move, down right');
+runTest(board.makeMove(['c', 3], ['b', 4]), true, 'Bishop makes legal move, up left');
+runTest(board.makeMove(['c', 3], ['a', 1]), true, 'Bishop makes legal move, down left'); 
+runTest(board.makeMove(['c', 3], ['e', 5]), true, 'Bishop makes legal move, up right');
+runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move, not diagonal');
+runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, cannot land on team piece');
+runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
+runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
+
+runTest(board.makeMove(['e', 6], ['a', 6]), true, 'Rook makes legal move, left');
+runTest(board.makeMove(['e', 6], ['e', 1]), true, 'Rook makes legal move, down');
+runTest(board.makeMove(['e', 6], ['h', 6]), true, 'Rook makes legal move, right');
+runTest(board.makeMove(['e', 6], ['e', 8]), true, 'Rook makes legal move, left');
+runTest(board.makeMove(['e', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
+runTest(board.makeMove(['e', 6], ['f', 6]), false, 'Rook makes illegal move, cannot land on team piece');
+runTest(board.makeMove(['e', 6], ['e', 4]), true, 'Rook makes legal move, captures opponent');
+runTest(board.makeMove(['e', 6], ['e', 2]), false, 'Rook makes illegal move, cannot jump over pieces');
+
+
+
