@@ -276,12 +276,6 @@ class Bishop extends Piece {
       return false;
     }
 
-    // the bishop piece can only travel on squares of its opposite color.
-    // TODO: Not true.
-    else if(squareStart['color'] == pieceDetails['color']) {
-      return false;
-    }
-
     else if(squareStart['color'] != pieceDetails['color']) {
       // TODO: Replace with the main letters array.
       let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
