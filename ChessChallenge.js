@@ -163,10 +163,10 @@ class Board {
 
     let squareStart = this.getSquare(start[0], start[1]);
     let piece = squareStart.getPiece();
-    // receive an array of squares that are in between start and end.
+    // Array of squares in between start and end.
     let inbetweenSquares = piece.makeMove(start, end);
 
-    // if the piece moves are illegal, inbetweenSquares will return as false.
+    // Illegal moves will return as false.
     // TODO: for best practice, return empty array instead of false.
     if(inbetweenSquares == false) {
       return false;
@@ -184,7 +184,7 @@ class Board {
         // BYA: Check if the current square is the end square
         if(item[0] == end[0] && item[1] == end[1]) {
           
-          // if there is a piece on the end square, the pieces cannot be the same color.
+          // end pieces cannot be the same as movement pieces color.
           if(pieceValue['color'] == squareStart['piece']['color']) {
             return false;
           }
@@ -269,8 +269,7 @@ class Bishop extends Piece {
     let squareStart = board.getSquare(start[0], start[1]);    
     let pieceDetails = squareStart.getPiece();
 
-    // the bishop cannot move vertically or horizonatally; check the indexes 
-    // to see if the move is trying to do so.
+    // Diagonal movement only.
     // TODO: Consider getting rid of this check, and adding instead a way to see
     // if the move is legal. 
     if(start[0] == end[0] || start[1] == end[1]) {
@@ -333,7 +332,7 @@ class Bishop extends Piece {
           let diffIndex = (startIndex - endIndex);
 
           for(let i = 1; i <= diffIndex; i++) {
-            // letter added needs index to decrease, num to increase.
+            // letter index to decrease, num to increase.
             collectSquares.push([letters[startIndex-i], squareNum+i]);
 
           }
@@ -346,7 +345,7 @@ class Bishop extends Piece {
           let diffIndex = (startIndex - endIndex);
 
           for(let i = 1; i <= diffIndex; i++) {
-            // letter added needs its index to decrease, num needs to decrease.
+            // letter index to decrease, num to decrease.
             collectSquares.push([letters[startIndex-i], squareNum-i]);
 
           }
@@ -377,8 +376,7 @@ class Rook extends Piece {
    */
    makeMove(start, end) {
 
-    // piece can only move vertically ot horizontally, checking if moving vertically.
-    // BYA: Vertical movement
+    // Verical movement only
     if(start[0] == end[0]) {
     
       // Optional TODO: collapse branches; use built in functions like min max to 
@@ -389,7 +387,7 @@ class Rook extends Piece {
 
         for(let i = end[1]; i < start[1]; i++) {
 
-          // because piece is always moving vertically here, always add same 0 index for the letter. 
+          // Vertical only, always add same 0 index for the letter. 
           collectSquares.push([value, i]);
         
         }
@@ -408,7 +406,7 @@ class Rook extends Piece {
       } 
     }
 
-    // checking if piece is moving horizontally.
+    // Horizontal movement only.
     else if(start[1] == end[1]) {
       let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
       let startIndex = letters.indexOf(start[0]);
@@ -437,7 +435,7 @@ class Rook extends Piece {
       } 
     } 
 
-    // if the requested move is not horizonal or vertical, than the move is illegal.
+    // if move is not horizonal or vertical, than the move is illegal.
     else {
       return false;
     }
@@ -460,26 +458,6 @@ board.setPiece(new Rook('black'), 'e', 6);
 // Setting Up the Board: END
 
 
-
-// // Moves for the White Bishop
-// // Bishops only move diagonally
-// console.assert(board.makeMove(['c', 3], ['e', 1]), 'Success'); // would output nothing since it is a success
-// console.assert(board.makeMove(['c', 3], ['f', 6]), 'Success'); // would output nothing since it is a success
-
-// console.assert(board.makeMove(['c', 3], ['h', 5]), 'Fail - Illegal move bishops in general');
-// console.assert(board.makeMove(['c', 3], ['b', 4]), 'Fail - Illegal move (white pawn on the way)');
-// console.assert(board.makeMove(['c', 3], ['h', 8]), 'Fail - Illegal move (cannot jump over other pieces)');
-
-// // // Moves for the Black Rook
-// // // Rooks moving only vertically or horizontally
-// console.assert(board.makeMove(['e', 6], ['a', 6]), 'Success'); // would output nothing since it is a success
-// console.assert(board.makeMove(['e', 6], ['e', 4]), 'Success'); // would output nothing since it is a success
-
-// console.assert(board.makeMove(['e', 6], ['c', 5]), 'Fail - Illegal move rooks in general')
-// console.assert(board.makeMove(['e', 6], ['f', 6]), 'Fail - Illegal move (black pawn on the way)');
-// console.assert(board.makeMove(['e', 6], ['e', 1]), 'Fail - Illegal move (cannot jump over other pieces)');
-
-
 function runTest(testValue, expectedResult, description) {
   console.log(description)
   if (testValue === expectedResult) {
@@ -499,7 +477,7 @@ runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, capt
 runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
 
 runTest(board.makeMove(['e', 6], ['a', 6]), true, 'Rook makes legal move, left');
-runTest(board.makeMove(['e', 6], ['e', 1]), true, 'Rook makes legal move, down');
+runTest(board.makeMove(['e', 6], ['e', 5]), true, 'Rook makes legal move, down');
 runTest(board.makeMove(['e', 6], ['h', 6]), true, 'Rook makes legal move, right');
 runTest(board.makeMove(['e', 6], ['e', 8]), true, 'Rook makes legal move, left');
 runTest(board.makeMove(['e', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
