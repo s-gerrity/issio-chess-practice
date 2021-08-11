@@ -160,15 +160,17 @@ class Board {
    */
 
   makeMove(start, end) {
+    // Collect all squares in a move, check if pieces are in the move and if they're legal.
 
+    // Find the piece making the move and execute the pieces move.
     let squareStart = this.getSquare(start[0], start[1]);
     let piece = squareStart.getPiece();
-    // Array of squares in between start and end.
+    // Collects an array of squares in between start and end move, inclusive.
     let inbetweenSquares = piece.makeMove(start, end);
 
     // Illegal moves will return as false.
     // TODO: for best practice, return empty array instead of false.
-    if(inbetweenSquares == false) {
+    if(inbetweenSquares == []) {
       return false;
     }
     // TODO: reverse the loops true and false returns; change the function.
@@ -178,7 +180,8 @@ class Board {
       let retrieveSquare = this.getSquare(item[0], item[1]);
       // check if there is a piece on the square.
       // TODO: retrieveSquare.getPiece()
-      let pieceValue = retrieveSquare['piece'];
+      // let pieceValue = retrieveSquare['piece'];
+      let pieceValue = retrieveSquare.getPiece();
 
       if(pieceValue != null) {
         // BYA: Check if the current square is the end square
@@ -273,7 +276,7 @@ class Bishop extends Piece {
     // TODO: Consider getting rid of this check, and adding instead a way to see
     // if the move is legal. 
     if(start[0] == end[0] || start[1] == end[1]) {
-      return false;
+      return [];
     }
 
     else if(squareStart['color'] != pieceDetails['color']) {
@@ -431,7 +434,7 @@ class Rook extends Piece {
 
     // if move is not horizonal or vertical, than the move is illegal.
     else {
-      return false;
+      return [];
     }
   }
 }
