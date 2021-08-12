@@ -291,10 +291,8 @@ class Bishop extends Piece {
     }
 
     else if(squareStart['color'] != pieceDetails['color']) {
-      // TODO: Replace with the main letters array.
-      let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-      let startIndex = letters.indexOf(start[0]);
-      let endIndex = letters.indexOf(end[0]);
+      let startIndex = Board.LETTERS.indexOf(start[0]);
+      let endIndex = Board.LETTERS.indexOf(end[0]);
 
       //* start letter index is less than end letter index.
       if(startIndex < endIndex) {
@@ -309,7 +307,7 @@ class Bishop extends Piece {
 
           for(let i = 1; i <= diffIndex; i++) {
             // letter index to increase, num to increase.
-            collectSquares.push([letters[startIndex+i], squareNum+i]);
+            collectSquares.push([Board.LETTERS[startIndex+i], squareNum+i]);
 
           }
           return collectSquares;
@@ -323,7 +321,7 @@ class Bishop extends Piece {
           
           for(let i = 1; i <= diffIndex; i++) {
             // letter index needs to increase, num to decrease. 
-            collectSquares.push([letters[startIndex+i], squareNum-i]);
+            collectSquares.push([Board.LETTERS[startIndex+i], squareNum-i]);
 
           }
           return collectSquares;  
@@ -341,7 +339,7 @@ class Bishop extends Piece {
 
           for(let i = 1; i <= diffIndex; i++) {
             // letter index to decrease, num to increase.
-            collectSquares.push([letters[startIndex-i], squareNum+i]);
+            collectSquares.push([Board.LETTERS[startIndex-i], squareNum+i]);
 
           }
           return collectSquares;
@@ -354,7 +352,7 @@ class Bishop extends Piece {
 
           for(let i = 1; i <= diffIndex; i++) {
             // letter index to decrease, num to decrease.
-            collectSquares.push([letters[startIndex-i], squareNum-i]);
+            collectSquares.push([Board.LETTERS[startIndex-i], squareNum-i]);
 
           }
           return collectSquares;
@@ -418,7 +416,6 @@ class Rook extends Piece {
 
     // Horizontal movement only.
     else if(start[1] == end[1]) {
-      // let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
       let startIndex = Board.LETTERS.indexOf(start[0]);
       let endIndex = Board.LETTERS.indexOf(end[0]);
     
