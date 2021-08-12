@@ -388,10 +388,11 @@ class Rook extends Piece {
         let value = start[0];
 
         for(let i = end[1]; i < start[1]; i++) {
+          console.log(value, i);
 
           // Vertical only, always add same 0 index for the letter. 
           // Do not add the start square num.
-          collectSquares.push([value, i-1]);
+          collectSquares.push([value, i]);
         
         }
         return collectSquares;
@@ -451,11 +452,11 @@ const board = new Board();
 // White Pawn on B4
 board.setPiece(new Pawn('white'), 'a', 5);
 // White Pawn on E4
-board.setPiece(new Pawn('white'), 'e', 4);
+board.setPiece(new Pawn('white'), 'e', 1);
 // White Bishop on C3
 board.setPiece(new Bishop('white'), 'c', 3);
 // Black Pawn on F6
-board.setPiece(new Pawn('black'), 'f', 6);
+board.setPiece(new Pawn('black'), 'f', 7);
 // Black Rook on E6
 board.setPiece(new Rook('black'), 'e', 6);
 // Setting Up the Board: END
@@ -480,9 +481,9 @@ function runTest(testValue, expectedResult, description) {
 // runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
 
 // runTest(board.makeMove(['e', 6], ['a', 6]), true, 'Rook makes legal move, left');
-// runTest(board.makeMove(['e', 6], ['e', 5]), true, 'Rook makes legal move, down');
+runTest(board.makeMove(['e', 6], ['e', 2]), true, 'Rook makes legal move, down');
 // runTest(board.makeMove(['e', 6], ['h', 6]), true, 'Rook makes legal move, right');
-runTest(board.makeMove(['e', 6], ['e', 8]), true, 'Rook makes legal move, up');
+// runTest(board.makeMove(['e', 6], ['e', 8]), true, 'Rook makes legal move, up');
 // runTest(board.makeMove(['e', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
 // runTest(board.makeMove(['e', 6], ['f', 6]), false, 'Rook makes illegal move, cannot land on team piece');
 // runTest(board.makeMove(['e', 6], ['e', 4]), true, 'Rook makes legal move, captures opponent');
