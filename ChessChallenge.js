@@ -76,7 +76,6 @@ class Square {
    * @return Piece|null
    */
   getPiece() {
-    console.log("this piece");
     return this.piece;
   }
 }
@@ -186,15 +185,22 @@ class Board {
       console.log(pieceValue, "pieceValue");
 
       if(pieceValue != null) {
-        console.log("square piece valus is not null");
-        if(item = end && pieceValue['color'] != piece['color']) {
-          // console.log("aloha");
-          return true;   
+        console.log("square piece value is not null");
+        if(item[0] == end[0] && item[1] == end[1]) {
+          console.log("item equals end");
+          if(pieceValue['color'] != pieceInPlay['color']) {
+            return true;
+          }
         }
+        return false;
+        // {
+        //   // console.log("aloha");
+        //   return true;   
+        // }
       }
       else if(pieceValue == null) {
         console.log("square does not have a piece on it");
-        // console.log(item, "item", end, "end");
+
         if(item[0] == end[0]) {
           console.log("the square space column the same as the end square column");
           if(item[1] == end[1]) {
@@ -395,7 +401,7 @@ class Rook extends Piece {
           collectSquares.push([value, i]);
         
         }
-        return collectSquares;
+        return collectSquares.reverse();
       } 
       
       else if(start[1] < end[1]) {
@@ -452,7 +458,7 @@ const board = new Board();
 // White Pawn on B4
 board.setPiece(new Pawn('white'), 'a', 5);
 // White Pawn on E4
-board.setPiece(new Pawn('white'), 'd', 2);
+board.setPiece(new Pawn('white'), 'd', 3);
 // White Bishop on C3
 board.setPiece(new Bishop('white'), 'c', 3);
 // Black Pawn on F6
@@ -471,23 +477,21 @@ function runTest(testValue, expectedResult, description) {
   }
 };
 
-// runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move, down right');
-// runTest(board.makeMove(['c', 3], ['b', 4]), true, 'Bishop makes legal move, up left');
-// runTest(board.makeMove(['c', 3], ['a', 1]), true, 'Bishop makes legal move, down left'); 
-// runTest(board.makeMove(['c', 3], ['e', 5]), true, 'Bishop makes legal move, up right');
-// runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move, not diagonal');
-// runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, cannot land on team piece');
-// runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
-// runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
+runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move, down right');
+runTest(board.makeMove(['c', 3], ['b', 4]), true, 'Bishop makes legal move, up left');
+runTest(board.makeMove(['c', 3], ['a', 1]), true, 'Bishop makes legal move, down left'); 
+runTest(board.makeMove(['c', 3], ['e', 5]), true, 'Bishop makes legal move, up right');
+runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move, not diagonal');
+runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, cannot land on team piece');
+runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
+runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
 
 runTest(board.makeMove(['d', 6], ['a', 6]), true, 'Rook makes legal move, left');
-runTest(board.makeMove(['d', 6], ['d', 3]), true, 'Rook makes legal move, down');
+runTest(board.makeMove(['d', 6], ['d', 4]), true, 'Rook makes legal move, down');
 runTest(board.makeMove(['d', 6], ['e', 6]), true, 'Rook makes legal move, right');
 runTest(board.makeMove(['d', 6], ['d', 8]), true, 'Rook makes legal move, up');
 runTest(board.makeMove(['d', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
 runTest(board.makeMove(['d', 6], ['f', 6]), false, 'Rook makes illegal move, cannot land on team piece');
-// runTest(board.makeMove(['d', 6], ['d', 2]), true, 'Rook makes legal move, captures opponent');
-// runTest(board.makeMove(['d', 6], ['d', 1]), false, 'Rook makes illegal move, cannot jump over pieces');
-
-
+runTest(board.makeMove(['d', 6], ['d', 3]), true, 'Rook makes legal move, captures opponent');
+runTest(board.makeMove(['d', 6], ['d', 1]), false, 'Rook makes illegal move, cannot jump over pieces');
 
