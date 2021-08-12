@@ -167,41 +167,41 @@ class Board {
     let piece = squareStart.getPiece();
     // Collects an array of squares in between start and end move, inclusive.
     let inbetweenSquares = piece.makeMove(start, end);
+    console.log(inbetweenSquares, "inbetweenSquares");
 
-    // Illegal moves will return as false.
-    // TODO: for best practice, return empty array instead of false.
-    if(inbetweenSquares == []) {
+    // Illegal moves will return as empty array.
+    if(inbetweenSquares == false) {
       return false;
     }
-    // TODO: reverse the loops true and false returns; change the function.
-    for(let item of inbetweenSquares) {
 
+    for(let item of inbetweenSquares) {
+      console.log(item, "item");
       // extract squares from array.
       let retrieveSquare = this.getSquare(item[0], item[1]);
       // check if there is a piece on the square.
-      // TODO: retrieveSquare.getPiece()
-      // let pieceValue = retrieveSquare['piece'];
       let pieceValue = retrieveSquare.getPiece();
+      console.log(pieceValue, "pieceValue");
 
       if(pieceValue != null) {
-        // BYA: Check if the current square is the end square
-        if(item[0] == end[0] && item[1] == end[1]) {
-          
-          // end pieces cannot be the same as movement pieces color.
-          if(pieceValue['color'] == squareStart['piece']['color']) {
-            return false;
-          }
-        }
-
-        // the only square in the move that is allowed to have a piece on it,
-        // is the end square. check if the occupied square is the end. 
-        else if(item != end) {
-          return false;
-          
+        console.log("sup");
+        if(item = end && pieceValue['color'] != piece['color']) {
+          // console.log("aloha");
+          return true;   
         }
       }
+      else if(pieceValue == null) {
+        // console.log(item, "item", end, "end");
+        if(item[0] == end[0]) {
+          console.log("hi");
+          if(item[1] == end[1]) {
+            console.log("bye");
+            return true;
+          }
+        } 
+        continue;
+      }
     }
-    return true;
+    return false;
   }
 }
 
@@ -385,7 +385,8 @@ class Rook extends Piece {
         for(let i = end[1]; i < start[1]; i++) {
 
           // Vertical only, always add same 0 index for the letter. 
-          collectSquares.push([value, i]);
+          // Do not add the start square num.
+          collectSquares.push([value, i-1]);
         
         }
         return collectSquares;
@@ -396,7 +397,7 @@ class Rook extends Piece {
         let value = start[0];
 
         for(let i = start[1]; i < end[1]; i++) {
-          collectSquares.push([value, i]);
+          collectSquares.push([value, i+1]);
         
         }
         return collectSquares;
@@ -434,7 +435,7 @@ class Rook extends Piece {
 
     // if move is not horizonal or vertical, than the move is illegal.
     else {
-      return [];
+      return false;
     }
   }
 }
@@ -464,19 +465,19 @@ function runTest(testValue, expectedResult, description) {
   }
 };
 
-runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move, down right');
-runTest(board.makeMove(['c', 3], ['b', 4]), true, 'Bishop makes legal move, up left');
-runTest(board.makeMove(['c', 3], ['a', 1]), true, 'Bishop makes legal move, down left'); 
-runTest(board.makeMove(['c', 3], ['e', 5]), true, 'Bishop makes legal move, up right');
-runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move, not diagonal');
-runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, cannot land on team piece');
-runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
-runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
+// runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move, down right');
+// runTest(board.makeMove(['c', 3], ['b', 4]), true, 'Bishop makes legal move, up left');
+// runTest(board.makeMove(['c', 3], ['a', 1]), true, 'Bishop makes legal move, down left'); 
+// runTest(board.makeMove(['c', 3], ['e', 5]), true, 'Bishop makes legal move, up right');
+// runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move, not diagonal');
+// runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, cannot land on team piece');
+// runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
+// runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
 
 runTest(board.makeMove(['e', 6], ['a', 6]), true, 'Rook makes legal move, left');
 runTest(board.makeMove(['e', 6], ['e', 5]), true, 'Rook makes legal move, down');
 runTest(board.makeMove(['e', 6], ['h', 6]), true, 'Rook makes legal move, right');
-runTest(board.makeMove(['e', 6], ['e', 8]), true, 'Rook makes legal move, left');
+runTest(board.makeMove(['e', 6], ['e', 8]), true, 'Rook makes legal move, up');
 runTest(board.makeMove(['e', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
 runTest(board.makeMove(['e', 6], ['f', 6]), false, 'Rook makes illegal move, cannot land on team piece');
 runTest(board.makeMove(['e', 6], ['e', 4]), true, 'Rook makes legal move, captures opponent');
