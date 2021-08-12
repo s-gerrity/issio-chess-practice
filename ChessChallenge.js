@@ -452,13 +452,13 @@ const board = new Board();
 // White Pawn on B4
 board.setPiece(new Pawn('white'), 'a', 5);
 // White Pawn on E4
-board.setPiece(new Pawn('white'), 'e', 1);
+board.setPiece(new Pawn('white'), 'd', 2);
 // White Bishop on C3
 board.setPiece(new Bishop('white'), 'c', 3);
 // Black Pawn on F6
-board.setPiece(new Pawn('black'), 'f', 7);
+board.setPiece(new Pawn('black'), 'f', 6);
 // Black Rook on E6
-board.setPiece(new Rook('black'), 'e', 6);
+board.setPiece(new Rook('black'), 'd', 6);
 // Setting Up the Board: END
 
 
@@ -480,14 +480,14 @@ function runTest(testValue, expectedResult, description) {
 // runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
 // runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
 
-// runTest(board.makeMove(['e', 6], ['a', 6]), true, 'Rook makes legal move, left');
-runTest(board.makeMove(['e', 6], ['e', 2]), true, 'Rook makes legal move, down');
-// runTest(board.makeMove(['e', 6], ['h', 6]), true, 'Rook makes legal move, right');
-// runTest(board.makeMove(['e', 6], ['e', 8]), true, 'Rook makes legal move, up');
-// runTest(board.makeMove(['e', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
-// runTest(board.makeMove(['e', 6], ['f', 6]), false, 'Rook makes illegal move, cannot land on team piece');
-// runTest(board.makeMove(['e', 6], ['e', 4]), true, 'Rook makes legal move, captures opponent');
-// runTest(board.makeMove(['e', 6], ['e', 2]), false, 'Rook makes illegal move, cannot jump over pieces');
+runTest(board.makeMove(['d', 6], ['a', 6]), true, 'Rook makes legal move, left');
+runTest(board.makeMove(['d', 6], ['d', 3]), true, 'Rook makes legal move, down');
+runTest(board.makeMove(['d', 6], ['e', 6]), true, 'Rook makes legal move, right');
+runTest(board.makeMove(['d', 6], ['d', 8]), true, 'Rook makes legal move, up');
+runTest(board.makeMove(['d', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
+runTest(board.makeMove(['d', 6], ['f', 6]), false, 'Rook makes illegal move, cannot land on team piece');
+// runTest(board.makeMove(['d', 6], ['d', 2]), true, 'Rook makes legal move, captures opponent');
+// runTest(board.makeMove(['d', 6], ['d', 1]), false, 'Rook makes illegal move, cannot jump over pieces');
 
 
 
