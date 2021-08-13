@@ -38,20 +38,20 @@ class Key {
 
 class Keyboard {
   static CHARACTERS = ['', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
-  static WIDTH = 4;
-  static HEIGHT = 10;
+  static WIDTH = 10;
+  static HEIGHT = 4;
 
   keys = {};
 
   constructor() {
 
     // Setting vertical
-    for (let i = 1; i <= Keyboard.WIDTH; i += 1) {
+    for (let i = 1; i <= Keyboard.HEIGHT; i += 1) {
       const character = Keyboard.CHARACTERS[i];
       this.keys[character] = {};
 
       // Setting horizontal
-      for (let j = 1; j <= Keyboard.HEIGHT; j += 1) {
+      for (let j = 1; j <= Keyboard.WIDTH; j += 1) {
 
         this.keys[character][j] = new Key(character, j);
       }
@@ -60,11 +60,11 @@ class Keyboard {
 
   print() {
 
-    for (let i = 1; i <= Keyboard.WIDTH; i += 1) {
+    for (let i = 1; i <= Keyboard.HEIGHT; i += 1) {
       const column = Keyboard.CHARACTERS[i];
       var rowString = column + ": ";
 
-    for (let j = 1; j <= Keyboard.HEIGHT; j += 1) {
+    for (let j = 1; j <= Keyboard.WIDTH; j += 1) {
       let key = keyboard.getKey(column, j);
       let character = key.getCharacter();
 
