@@ -51,7 +51,7 @@ class Key {
         this.keys[character] = {};
   
         // Setting horizontal
-        for (let j = 1; j < Keyboard.HEIGHT; j += 1) {
+        for (let j = 1; j <= Keyboard.HEIGHT; j += 1) {
   
           this.keys[character][j] = new Key(character, j);
         }
@@ -107,12 +107,13 @@ class Key {
         for (let j = 1; j <= Keyboard.HEIGHT; j += 1) {
             let key = keyboard.getKey(character, j);
             let character = key.getCharacter();
+
             if (piece == null) {
             rowString += "[ ]";
             }
             else {
             let character = key.getCharacter(); 
-            rowString += "[" + character + "] ";
+            rowString += "[" + character + "]";
             }
         }
         console.log(rowString);

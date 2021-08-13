@@ -106,7 +106,7 @@ class Board {
       this.squares[letter] = {};
 
       // Setting horizontal
-      for (let j = 1; j < Board.HEIGHT; j += 1) {
+      for (let j = 1; j <= Board.HEIGHT; j += 1) {
         const color = flag ? 'dark' : 'light';
 
         this.squares[letter][j] = new Square(letter, j, color);
@@ -121,23 +121,22 @@ class Board {
       const letter = Board.LETTERS[i];
 
       var rowString = letter + ": ";
-    }
+    
 
     for (let j = 1; j <= Board.HEIGHT; j += 1) {
-      console.log(letter, "letter");
 
       let square = board.getSquare(letter, j);
       let piece = square.getPiece();
       if (piece == null) {
-        rowString += "[]";
+        rowString += "[ ]";
       }
       else {
         let firstLetterOfPiece = piece.type[0];
-        rowString += "[" + firstLetterOfPiece + "] ";
+        rowString += "[" + firstLetterOfPiece + "]";
       }
     }
     console.log(rowString);
-
+  }
   }
 
   /**
@@ -417,7 +416,7 @@ class Rook extends Piece {
         let value = start[0];
 
         for(let i = end[1]; i < start[1]; i++) {
-          console.log(value, i);
+          // console.log(value, i);
 
           // Vertical only, always add same 0 index for the letter. 
           // Do not add the start square num.
@@ -489,7 +488,8 @@ board.setPiece(new Pawn('black'), 'f', 6);
 board.setPiece(new Rook('black'), 'd', 6);
 // Setting Up the Board: END
 
-board.print();
+// To print the board and its piece placement
+// board.print();
 
 
 function runTest(testValue, expectedResult, description) {
