@@ -87,8 +87,8 @@ class Square {
 // ********************************************************************************************
 class Board {
   static LETTERS = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-  static WIDTH = 9;
-  static HEIGHT = 9;
+  static WIDTH = 8;
+  static HEIGHT = 8;
 
   // squares grid in the format square = {}{}, so it could be easily
   // accessed as squares['a'][3];
@@ -113,6 +113,31 @@ class Board {
         flag = !flag;
       }
     }
+  }
+
+  print() {
+
+    for (let i = 1; i <= Board.WIDTH; i += 1) {
+      const letter = Board.LETTERS[i];
+
+      var rowString = letter + ": ";
+    }
+
+    for (let j = 1; j <= Board.HEIGHT; j += 1) {
+      console.log(letter, "letter");
+
+      let square = board.getSquare(letter, j);
+      let piece = square.getPiece();
+      if (piece == null) {
+        rowString += "[]";
+      }
+      else {
+        let firstLetterOfPiece = piece.type[0];
+        rowString += "[" + firstLetterOfPiece + "] ";
+      }
+    }
+    console.log(rowString);
+
   }
 
   /**
@@ -164,11 +189,11 @@ class Board {
 
     // Find the piece making the move and execute the pieces move.
     let squareStart = this.getSquare(start[0], start[1]);
-    console.log(squareStart, "squareStart");
+    // console.log(squareStart, "squareStart");
     let pieceInPlay = squareStart.getPiece();
     // Collects an array of squares in between start and end move, inclusive.
     let inbetweenSquares = pieceInPlay.makeMove(start, end);
-    console.log(inbetweenSquares, "inbetweenSquares");
+    // console.log(inbetweenSquares, "inbetweenSquares");
 
     // Illegal moves will return as empty array.
     if(inbetweenSquares == false) {
@@ -176,18 +201,18 @@ class Board {
     }
 
     for(let item of inbetweenSquares) {
-      console.log(item, "item");
+      // console.log(item, "item");
       // extract squares from array.
       let retrieveSquare = this.getSquare(item[0], item[1]);
-      console.log(retrieveSquare, "retrieveSquare");
+      // console.log(retrieveSquare, "retrieveSquare");
       // check if there is a piece on the square.
       let pieceValue = retrieveSquare.getPiece();
-      console.log(pieceValue, "pieceValue");
+      // console.log(pieceValue, "pieceValue");
 
       if(pieceValue != null) {
-        console.log("square piece value is not null");
+        // console.log("square piece value is not null");
         if(item[0] == end[0] && item[1] == end[1]) {
-          console.log("item equals end");
+          // console.log("item equals end");
           if(pieceValue['color'] != pieceInPlay['color']) {
             return true;
           }
@@ -199,12 +224,12 @@ class Board {
         // }
       }
       else if(pieceValue == null) {
-        console.log("square does not have a piece on it");
+        // console.log("square does not have a piece on it");
 
         if(item[0] == end[0]) {
-          console.log("the square space column the same as the end square column");
+          // console.log("the square space column the same as the end square column");
           if(item[1] == end[1]) {
-            console.log("the square space row is the same as the end square row, the move is finished");
+            // console.log("the square space row is the same as the end square row, the move is finished");
             return true;
           }
           continue;
@@ -463,6 +488,8 @@ board.setPiece(new Pawn('black'), 'f', 6);
 // Black Rook on E6
 board.setPiece(new Rook('black'), 'd', 6);
 // Setting Up the Board: END
+
+board.print();
 
 
 function runTest(testValue, expectedResult, description) {
