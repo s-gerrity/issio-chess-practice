@@ -72,34 +72,6 @@ class Keyboard {
 
 
   /**
-   * @method print - returns a log of the table to check that the default keyboard
-   * is populating properly
-   * Incomplete - needs to interact with constructor array 'defaultCharacters'
-   */
-  // print() {
-
-  //   for (let i = 1; i <= Keyboard.HEIGHT; i += 1) {
-  //     const row = Keyboard.ROWS[i];
-  //     var rowString = row + ": ";
-
-  //     for (let j = 1; j <= Keyboard.WIDTH; j += 1) {
-  //       let key = keyboard.getKey(row, j);
-  //       let character = key.getCharacter();
-
-  //       if (character == null) {
-  //         rowString += "[ ]";
-  //       }
-  //       else {
-  //         let character = key.getCharacter();
-  //         rowString += "[" + character + "]";
-  //       }
-  //     }
-  //     console.log(rowString);
-  //   }
-  // }
-
-
-  /**
    * @method getKey - returns the selected key
    * @param number x - horizontal coordinates [1 - 10]
    * @param number y - vertical coordinates [1 - 4]
@@ -202,6 +174,4 @@ class Flipped {
 
 
 const keyboard = new Keyboard();
-
-// keyboard.print();
 

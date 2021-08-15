@@ -87,7 +87,7 @@ class Square {
 // ********************************************************************************************
 class Board {
   static LETTERS = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-  static WIDTH = 3;
+  static WIDTH = 8;
   static HEIGHT = 8;
 
   // squares grid in the format square = {}{}, so it could be easily
