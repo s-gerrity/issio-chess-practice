@@ -301,17 +301,17 @@ let originalKeyboard = Keyboard.Original();
 originalKeyboard.print();
 
 // *** Some testing
-console.log('\nFlip horizontal:');
-let flippedHorizKeyboard = originalKeyboard.flipHorizontal();
-flippedHorizKeyboard.print();
+// console.log('\nFlip horizontal:');
+// let flippedHorizKeyboard = originalKeyboard.flipHorizontal();
+// flippedHorizKeyboard.print();
 
-console.log('\nFlip vertical');
-let flippedVertKeyboard = originalKeyboard.flipVertical();
-flippedVertKeyboard.print();
+// console.log('\nFlip vertical');
+// let flippedVertKeyboard = originalKeyboard.flipVertical();
+// flippedVertKeyboard.print();
 
-console.log('\nShift 3:');
-let shiftedKeyboard = originalKeyboard.shift(3);
-shiftedKeyboard.print();
+// console.log('\nShift 3:');
+// let shiftedKeyboard = originalKeyboard.shift(3);
+// shiftedKeyboard.print();
 
 // *** INPUTS *** //
 let keyboardTransformString = 'S3H';
