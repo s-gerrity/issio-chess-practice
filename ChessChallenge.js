@@ -116,14 +116,14 @@ class Board {
   }
 
   print() {
-    let rowStringColumns = Board.LETTERS.slice(1).reverse();
-
-    for (let i = 0; i < Board.WIDTH; i += 1) {
-      const letter = rowStringColumns[i];
-      var rowString = letter + ": ";    
-
-    for (let j = 1; j <= Board.HEIGHT; j += 1) {
-      let square = board.getSquare(letter, j);
+    let letters = Board.LETTERS; // is the letters array
+    
+    for (let i = Board.HEIGHT; i > 0; i -= 1) {  
+      let rowString = i + ": "; // "8: "
+      
+    for (let j = 1; j <= Board.WIDTH; j += 1) {
+      let letter = letters[j];
+      let square = board.getSquare(letter, i); // 'h', 1
       let piece = square.getPiece();
       if (piece == null) {
         rowString += "[ ]";

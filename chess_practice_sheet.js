@@ -115,26 +115,51 @@ class Board {
     }
   }
 
+  // print() {
+  //   let rowStringColumns = Board.LETTERS.slice(1).reverse();
+  //   console.log(rowStringColumns, "rowStringColumns");
+
+  //   for (let i = Board.HEIGHT; i > 0; i -= 1) {
+  //     const letter = rowStringColumns[i];
+  //     var rowString = rowStringColumns.indexOf(rowStringColumns[i]) + ": ";    
+
+  //   for (let j = 1; j <= Board.WIDTH; j += 1) {
+  //     let square = board.getSquare(letter, j);
+  //     let piece = square.getPiece();
+  //     if (piece == null) {
+  //       rowString += "[ ]";
+  //     }
+  //     else {
+  //       let firstLetterOfPiece = piece.type[0];
+  //       rowString += "[" + firstLetterOfPiece + "]";
+  //     }
+  //   }
+  //     console.log(rowString);
+  // }
   print() {
-    let rowStringColumns = Board.LETTERS.slice(1).reverse();
-
-    for (let i = 0; i < Board.WIDTH; i += 1) {
-      const letter = rowStringColumns[i];
-      var rowString = letter + ": ";    
-
-    for (let j = 1; j <= Board.HEIGHT; j += 1) {
-      let square = board.getSquare(letter, j);
+    let letters = Board.LETTERS; // is the letters array
+    
+    for (let i = Board.HEIGHT; i > 0; i -= 1) {  
+      let rowString = i + ": "; // "8: "
+      
+    for (let j = 1; j <= Board.WIDTH; j += 1) {
+      let letter = letters[j];
+      let square = board.getSquare(letter, i); // 'h', 1
       let piece = square.getPiece();
       if (piece == null) {
         rowString += "[ ]";
       }
       else {
         let firstLetterOfPiece = piece.type[0];
+        // console.log(piece, "piece", square, "square");
         rowString += "[" + firstLetterOfPiece + "]";
       }
+    
     }
       console.log(rowString);
   }
+  
+
 }
 
   /**
@@ -191,7 +216,7 @@ class Board {
     let pieceInPlay = squareStart.getPiece();
     // Collects an array of squares in between start and end move, inclusive.
     let inbetweenSquares = pieceInPlay.makeMove(start, end);
-    // console.log(inbetweenSquares, "inbetweenSquares");
+    console.log(inbetweenSquares, "inbetweenSquares");
 
     // Illegal moves will return as empty array.
     if(inbetweenSquares == false) {
@@ -401,6 +426,7 @@ class Rook extends Piece {
    * @param y
    */
    makeMove(start, end) {
+    let collectSquares = [];
 
     // Verical movement only
     if(start[0] == end[0]) {
@@ -410,15 +436,48 @@ class Rook extends Piece {
       for(let i = end[1]; i < start[1]; i++) {
         collectSquares.push([value, i]); 
       }
-      if(start[1] > end[1]) {
-        return collectSquares.reverse();
-      }
-      else {
-        return collectSquares;
-      }
+    if(start[1] > end[1]) {
+      return collectSquares.reverse();
     }
+    else {
+      return collectSquares;
+    }
+    }
+    // Horizontal movement only.
+    // TODO: need to min and max the start and end indices in order to loop and push into array.
+    else if(start[1] == end[1]) {
+      // let startIndex = Board.LETTERS.indexOf(start[0]);
+      // let endIndex = Board.LETTERS.indexOf(end[0]);
+      let value = start[1];
+      // let countOfSquaresToCollect = Math.abs(endIndex, startIndex);
+      let startAndEnd = [Board.LETTERS.indexOf(start[0]), Board.LETTERS.indexOf(end[0])];
+
+      var min = Math.min.apply(null, startAndEnd),
+          max = Math.max.apply(null, startAndEnd);
+      
+      for(let i = min+1; i < max+1; i++) {
+        // console.log(2);
+        collectSquares.push([Board.LETTERS[i], value]);
+      
     
-    //   // Optional TODO: collapse branches; use built in functions like min max to 
+      // if(startIndex < endIndex) {
+      //   console.log(3);
+      //   return collectSquares;
+      // }
+      // else {
+      //   console.log(4);
+      //   return collectSquares.reverse();
+      // }
+      }
+      return collectSquares;
+    }
+    else {
+      return false;
+    }
+   }
+}
+    
+// Optional TODO: collapse branches; use built in functions like min max to 
     //   // determine function. Reverse array when appropriate.
     //   if(start[1] > end[1]) {
     //     let collectSquares = [];
@@ -448,39 +507,39 @@ class Rook extends Piece {
     // }
 
     // Horizontal movement only.
-    else if(start[1] == end[1]) {
-      let startIndex = Board.LETTERS.indexOf(start[0]);
-      let endIndex = Board.LETTERS.indexOf(end[0]);
+//     else if(start[1] == end[1]) {
+//       let startIndex = Board.LETTERS.indexOf(start[0]);
+//       let endIndex = Board.LETTERS.indexOf(end[0]);
     
-      if(startIndex < endIndex) {
-        let collectSquares = [];
-        let value = start[1];
+//       if(startIndex < endIndex) {
+//         let collectSquares = [];
+//         let value = start[1];
         
-        for(let i = startIndex+1; i < endIndex+1; i++) {
-          collectSquares.push([Board.LETTERS[i], value]);
+//         for(let i = startIndex+1; i < endIndex+1; i++) {
+//           collectSquares.push([Board.LETTERS[i], value]);
 
-        }
-        return collectSquares;
-      }
+//         }
+//         return collectSquares;
+//       }
 
-      else {
-        let collectSquares = [];
-        let value = start[1];
+//       else {
+//         let collectSquares = [];
+//         let value = start[1];
         
-        for(let i = endIndex; i < startIndex; i++) {
-          collectSquares.push([Board.LETTERS[i], value]); 
+//         for(let i = endIndex; i < startIndex; i++) {
+//           collectSquares.push([Board.LETTERS[i], value]); 
           
-        }
-        return collectSquares; 
-      } 
-    } 
+//         }
+//         return collectSquares; 
+//       } 
+//     } 
 
-    // if move is not horizonal or vertical, than the move is illegal.
-    else {
-      return false;
-    }
-  }
-}
+//     // if move is not horizonal or vertical, than the move is illegal.
+//     else {
+//       return false;
+//     }
+//   }
+// }
   
 
 // // Setting Up the Board: START
@@ -519,12 +578,16 @@ function runTest(testValue, expectedResult, description) {
 // runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
 // runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
 
-// runTest(board.makeMove(['d', 6], ['a', 6]), true, 'Rook makes legal move, left');
+runTest(board.makeMove(['d', 6], ['a', 6]), true, 'Rook makes legal move, left');
 // runTest(board.makeMove(['d', 6], ['d', 4]), true, 'Rook makes legal move, down');
 // runTest(board.makeMove(['d', 6], ['e', 6]), true, 'Rook makes legal move, right');
-runTest(board.makeMove(['d', 6], ['d', 8]), true, 'Rook makes legal move, up');
+// runTest(board.makeMove(['d', 6], ['d', 8]), true, 'Rook makes legal move, up');
 // runTest(board.makeMove(['d', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
 // runTest(board.makeMove(['d', 6], ['f', 6]), false, 'Rook makes illegal move, cannot land on team piece');
 // runTest(board.makeMove(['d', 6], ['d', 3]), true, 'Rook makes legal move, captures opponent');
 // runTest(board.makeMove(['d', 6], ['d', 1]), false, 'Rook makes illegal move, cannot jump over pieces');
+
+// // TODO LEFT OFF 8/18: Added min max to Rook. Tests fail because (i think because) the board is not 
+// // assembled properly. Redesigning print(). 
+// // TODO LEFT OFF 8/17: Redoing the Rook makmove function. Some tests fail. Consider adding min max. 
 
