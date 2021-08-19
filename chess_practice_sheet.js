@@ -116,14 +116,13 @@ class Board {
   }
 
   print() {
-    let letters = Board.LETTERS; // is the letters array
     
     for (let i = Board.HEIGHT; i > 0; i -= 1) {  
-      let rowString = i + ": "; // "8: "
+      let rowString = i + ": ";
       
     for (let j = 1; j <= Board.WIDTH; j += 1) {
-      let letter = letters[j];
-      let square = board.getSquare(letter, i); // 'h', 1
+      let letter = Board.LETTERS[j];
+      let square = board.getSquare(letter, i); 
       let piece = square.getPiece();
       if (piece == null) {
         rowString += "[ ]";
@@ -208,6 +207,11 @@ class Board {
       let pieceValue = retrieveSquare.getPiece();
       // console.log(pieceValue, "pieceValue");
 
+      // if item is the start square, pass it
+      if (item[0] == start[0] && item[1] == start[1]) {
+        continue;
+      }
+      console.log(item, "hi");
       if(pieceValue != null) {
         // console.log("square piece value is not null");
         if(item[0] == end[0] && item[1] == end[1]) {
@@ -223,7 +227,7 @@ class Board {
         // }
       }
       else if(pieceValue == null) {
-        // console.log("square does not have a piece on it");
+        console.log("square does not have a piece on it");
 
         if(item[0] == end[0]) {
           // console.log("the square space column the same as the end square column");
@@ -406,51 +410,36 @@ class Rook extends Piece {
 
     // Verical movement only
     if(start[0] == end[0]) {
-      let collectSquares = [];
-      let value = start[0];
-
-      for(let i = end[1]; i < start[1]; i++) {
-        collectSquares.push([value, i]); 
-      }
-    if(start[1] > end[1]) {
-      return collectSquares.reverse();
-    }
-    else {
-      return collectSquares;
-    }
-    }
-    // Horizontal movement only.
-    // TODO: need to min and max the start and end indices in order to loop and push into array.
-    else if(start[1] == end[1]) {
-      // let startIndex = Board.LETTERS.indexOf(start[0]);
-      // let endIndex = Board.LETTERS.indexOf(end[0]);
-      let value = start[1];
-      // let countOfSquaresToCollect = Math.abs(endIndex, startIndex);
-      let startAndEnd = [Board.LETTERS.indexOf(start[0]), Board.LETTERS.indexOf(end[0])];
+      let value = start[0]; // d
+      let startAndEnd = [start[1], end[1]];
 
       var min = Math.min.apply(null, startAndEnd),
-          max = Math.max.apply(null, startAndEnd);
+          max = Math.max.apply(null, startAndEnd); 
+
+      for(let i = min; i <= max; i++) {
+        collectSquares.push([value, i]); 
+      }
+      return collectSquares;
+    }
+
+    // Horizontal movement only.
+    else if(start[1] == end[1]) {
+      let value = start[1];
+      let startAndEnd = [Board.LETTERS.indexOf(start[0]),
+                         Board.LETTERS.indexOf(end[0])]; 
+
+      var min = Math.min.apply(null, startAndEnd), 
+          max = Math.max.apply(null, startAndEnd);  
       
-      for(let i = min; i < max; i++) {
-        // console.log(2);
+      for(let i = min; i <= max; i++) {
         collectSquares.push([Board.LETTERS[i], value]);
-      
-    
-      // if(startIndex < endIndex) {
-      //   console.log(3);
-      //   return collectSquares;
-      // }
-      // else {
-      //   console.log(4);
-      //   return collectSquares.reverse();
-      // }
       }
       return collectSquares;
     }
     else {
       return false;
     }
-   }
+  }
 }
     
 // Optional TODO: collapse branches; use built in functions like min max to 
