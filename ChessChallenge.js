@@ -116,15 +116,16 @@ class Board {
   }
 
   print() {
-    let letters = Board.LETTERS; // is the letters array
+    let letters = Board.LETTERS; 
     
     for (let i = Board.HEIGHT; i > 0; i -= 1) {  
-      let rowString = i + ": "; // "8: "
+      let rowString = i + ": ";
       
     for (let j = 1; j <= Board.WIDTH; j += 1) {
       let letter = letters[j];
-      let square = board.getSquare(letter, i); // 'h', 1
+      let square = board.getSquare(letter, i);
       let piece = square.getPiece();
+
       if (piece == null) {
         rowString += "[ ]";
       }

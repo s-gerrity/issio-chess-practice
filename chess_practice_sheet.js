@@ -115,27 +115,6 @@ class Board {
     }
   }
 
-  // print() {
-  //   let rowStringColumns = Board.LETTERS.slice(1).reverse();
-  //   console.log(rowStringColumns, "rowStringColumns");
-
-  //   for (let i = Board.HEIGHT; i > 0; i -= 1) {
-  //     const letter = rowStringColumns[i];
-  //     var rowString = rowStringColumns.indexOf(rowStringColumns[i]) + ": ";    
-
-  //   for (let j = 1; j <= Board.WIDTH; j += 1) {
-  //     let square = board.getSquare(letter, j);
-  //     let piece = square.getPiece();
-  //     if (piece == null) {
-  //       rowString += "[ ]";
-  //     }
-  //     else {
-  //       let firstLetterOfPiece = piece.type[0];
-  //       rowString += "[" + firstLetterOfPiece + "]";
-  //     }
-  //   }
-  //     console.log(rowString);
-  // }
   print() {
     let letters = Board.LETTERS; // is the letters array
     
@@ -154,12 +133,9 @@ class Board {
         // console.log(piece, "piece", square, "square");
         rowString += "[" + firstLetterOfPiece + "]";
       }
-    
     }
       console.log(rowString);
   }
-  
-
 }
 
   /**
@@ -455,7 +431,7 @@ class Rook extends Piece {
       var min = Math.min.apply(null, startAndEnd),
           max = Math.max.apply(null, startAndEnd);
       
-      for(let i = min+1; i < max+1; i++) {
+      for(let i = min; i < max; i++) {
         // console.log(2);
         collectSquares.push([Board.LETTERS[i], value]);
       
@@ -579,13 +555,13 @@ function runTest(testValue, expectedResult, description) {
 // runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
 
 runTest(board.makeMove(['d', 6], ['a', 6]), true, 'Rook makes legal move, left');
-// runTest(board.makeMove(['d', 6], ['d', 4]), true, 'Rook makes legal move, down');
-// runTest(board.makeMove(['d', 6], ['e', 6]), true, 'Rook makes legal move, right');
-// runTest(board.makeMove(['d', 6], ['d', 8]), true, 'Rook makes legal move, up');
-// runTest(board.makeMove(['d', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
-// runTest(board.makeMove(['d', 6], ['f', 6]), false, 'Rook makes illegal move, cannot land on team piece');
-// runTest(board.makeMove(['d', 6], ['d', 3]), true, 'Rook makes legal move, captures opponent');
-// runTest(board.makeMove(['d', 6], ['d', 1]), false, 'Rook makes illegal move, cannot jump over pieces');
+runTest(board.makeMove(['d', 6], ['d', 4]), true, 'Rook makes legal move, down');
+runTest(board.makeMove(['d', 6], ['e', 6]), true, 'Rook makes legal move, right');
+runTest(board.makeMove(['d', 6], ['d', 8]), true, 'Rook makes legal move, up');
+runTest(board.makeMove(['d', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
+runTest(board.makeMove(['d', 6], ['f', 6]), false, 'Rook makes illegal move, cannot land on team piece');
+runTest(board.makeMove(['d', 6], ['d', 3]), true, 'Rook makes legal move, captures opponent');
+runTest(board.makeMove(['d', 6], ['d', 1]), false, 'Rook makes illegal move, cannot jump over pieces');
 
 // // TODO LEFT OFF 8/18: Added min max to Rook. Tests fail because (i think because) the board is not 
 // // assembled properly. Redesigning print(). 
