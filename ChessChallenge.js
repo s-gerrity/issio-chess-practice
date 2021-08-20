@@ -308,8 +308,6 @@ class Bishop extends Piece {
    */
 
   makeMove(start, end) {
-    let squareStart = board.getSquare(start[0], start[1]);
-    let pieceDetails = squareStart.getPiece();
 
     // Diagonal movement only.
     // TODO: Consider getting rid of this check, and adding instead a way to see
@@ -318,22 +316,22 @@ class Bishop extends Piece {
       return false;
     }
 
-    let startIndex = Board.LETTERS.indexOf(start[0]); // 3
-    let endIndex = Board.LETTERS.indexOf(end[0]); // 5
+    let startIndex = Board.LETTERS.indexOf(start[0]); 
+    let endIndex = Board.LETTERS.indexOf(end[0]); 
 
     //* start letter index is less than end letter index.
     if (startIndex < endIndex) {
-      let countOfSquaresToCollect = Math.abs(endIndex - startIndex); // 2
-      console.log(endIndex, "end", startIndex, "start", countOfSquaresToCollect, "countOfSquaresToCollect");
+      let countOfSquaresToCollect = Math.abs(endIndex - startIndex); 
 
       //* start num is less than end num.
-      if (start[1] < end[1]) { 
+      if (start[1] < end[1]) {
         let collectSquares = [];
         let squareNum = start[1];
 
         // create variable for how many items to add to array
-        for (let i = 1; i <= countOfSquaresToCollect; i++) {
+        for (let i = 0; i <= countOfSquaresToCollect; i++) {
           // letter index to increase, num to increase.
+          // *******************************************************************************
           collectSquares.push([Board.LETTERS[startIndex + i], squareNum + i]);
 
         }
@@ -341,13 +339,13 @@ class Bishop extends Piece {
       }
 
       //* start num is higher than end num
-      else if (start[1] > end[1]) {
-        let collectSquares = [];
+      else if (start[1] > end[1]) { 
+        let collectSquares = [start]; 
         let squareNum = start[1];
 
-        for (let i = 1; i <= countOfSquaresToCollect; i++) {
+        for (let i = 1; i <= countOfSquaresToCollect; i++) { 
           // letter index needs to increase, num to decrease. 
-          collectSquares.push([Board.LETTERS[startIndex + i], squareNum - i]);
+          collectSquares.push([Board.LETTERS[startIndex + i], squareNum - i]); 
 
         }
         return collectSquares;
@@ -356,7 +354,7 @@ class Bishop extends Piece {
 
     //* start letter index higher than end letter index.
     else if (startIndex > endIndex) {
-      let countOfSquaresToCollect = Math.abs(startIndex, endIndex);
+      let countOfSquaresToCollect = Math.abs(startIndex - endIndex); 
 
       //* start num lower than end num.
       if (start[1] < end[1]) {
@@ -412,6 +410,7 @@ class Rook extends Piece {
       let value = start[0]; // d
       let startAndEnd = [start[1], end[1]];
 
+      // TODO: remove "apply" from min max.
       var min = Math.min.apply(null, startAndEnd),
         max = Math.max.apply(null, startAndEnd);
 
