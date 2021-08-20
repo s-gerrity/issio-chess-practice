@@ -308,11 +308,13 @@ class Bishop extends Piece {
    */
 
   makeMove(start, end) {
+    // Diagonal movement only.
     let startIndex = Board.LETTERS.indexOf(start[0]); 
     let endIndex = Board.LETTERS.indexOf(end[0]);
     let countOfSquaresToCollect = Math.abs(endIndex - startIndex); 
+    let squareNum = start[1];
+    let collectSquares = [];
 
-    // Diagonal movement only.
     // TODO: Consider getting rid of this check, and adding instead a way to see
     // if the move is legal. 
     if (start[0] == end[0] || start[1] == end[1]) {
@@ -324,13 +326,10 @@ class Bishop extends Piece {
 
       //* start num is less than end num.
       if (start[1] < end[1]) {
-        let collectSquares = [];
-        let squareNum = start[1];
 
         // create variable for how many items to add to array
         for (let i = 0; i <= countOfSquaresToCollect; i++) {
           // letter index to increase, num to increase.
-          // *******************************************************************************
           collectSquares.push([Board.LETTERS[startIndex + i], squareNum + i]);
 
         }
@@ -339,8 +338,6 @@ class Bishop extends Piece {
 
       //* start num is higher than end num
       else if (start[1] > end[1]) { 
-        let collectSquares = [start]; 
-        let squareNum = start[1];
 
         for (let i = 1; i <= countOfSquaresToCollect; i++) { 
           // letter index needs to increase, num to decrease. 
@@ -356,8 +353,6 @@ class Bishop extends Piece {
 
       //* start num lower than end num.
       if (start[1] < end[1]) {
-        let collectSquares = [];
-        let squareNum = start[1];
 
         for (let i = 1; i <= countOfSquaresToCollect; i++) {
           // letter index to decrease, num to increase.
@@ -368,8 +363,6 @@ class Bishop extends Piece {
       }
 
       else if (start[1] > end[1]) {
-        let collectSquares = [];
-        let squareNum = start[1];
 
         for (let i = 1; i <= countOfSquaresToCollect; i++) {
           // letter index to decrease, num to decrease.
