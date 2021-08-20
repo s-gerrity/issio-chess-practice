@@ -323,8 +323,8 @@ class Bishop extends Piece {
 
     //* start letter index is less than end letter index.
     if (startIndex < endIndex) {
-      let countOfSquaresToCollect = Math.abs(endIndex, startIndex); // 2
-      console.log(countOfSquaresToCollect, "countOfSquaresToCollect");
+      let countOfSquaresToCollect = Math.abs(endIndex - startIndex); // 2
+      console.log(endIndex, "end", startIndex, "start", countOfSquaresToCollect, "countOfSquaresToCollect");
 
       //* start num is less than end num.
       if (start[1] < end[1]) { 
