@@ -534,14 +534,14 @@ function runTest(testValue, expectedResult, description) {
   }
 };
 
-// runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move, down right');
-// runTest(board.makeMove(['c', 3], ['b', 4]), true, 'Bishop makes legal move, up left');
-// runTest(board.makeMove(['c', 3], ['a', 1]), true, 'Bishop makes legal move, down left'); 
-// runTest(board.makeMove(['c', 3], ['e', 5]), true, 'Bishop makes legal move, up right');
-// runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move, not diagonal');
-// runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, cannot land on team piece');
-// runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
-// runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
+runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move, down right');
+runTest(board.makeMove(['c', 3], ['b', 4]), true, 'Bishop makes legal move, up left');
+runTest(board.makeMove(['c', 3], ['a', 1]), true, 'Bishop makes legal move, down left'); 
+runTest(board.makeMove(['c', 3], ['e', 5]), true, 'Bishop makes legal move, up right');
+runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move, not diagonal');
+runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, cannot land on team piece');
+runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
+runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
 
 runTest(board.makeMove(['d', 6], ['a', 6]), true, 'Rook makes legal move, left');
 runTest(board.makeMove(['d', 6], ['d', 4]), true, 'Rook makes legal move, down');
@@ -552,6 +552,5 @@ runTest(board.makeMove(['d', 6], ['f', 6]), false, 'Rook makes illegal move, can
 runTest(board.makeMove(['d', 6], ['d', 3]), true, 'Rook makes legal move, captures opponent');
 runTest(board.makeMove(['d', 6], ['d', 1]), false, 'Rook makes illegal move, cannot jump over pieces');
 
-// // TODO LEFT OFF 8/18: on original doc, find a way to check all squares without exiting the loop early. if end square 
-// is early in the array, it exits the loop before checking if other squares are illegally occupied.
+// // TODO LEFT OFF 8/19: bishop tests fail or error from not iterating through loop. 
 
