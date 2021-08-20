@@ -307,81 +307,69 @@ class Bishop extends Piece {
    * @param y
    */
 
-  makeMove(start, end) {
-    let squareStart = board.getSquare(start[0], start[1]);    
-    let pieceDetails = squareStart.getPiece();
-
+   makeMove(start, end) {
     // Diagonal movement only.
+    let startIndex = Board.LETTERS.indexOf(start[0]); 
+    let endIndex = Board.LETTERS.indexOf(end[0]);
+    let countOfSquaresToCollect = Math.abs(endIndex - startIndex); 
+    let squareNum = start[1];
+    let collectSquares = [];
+
     // TODO: Consider getting rid of this check, and adding instead a way to see
     // if the move is legal. 
-    if(start[0] == end[0] || start[1] == end[1]) {
-      return [];
-    }
+    if (start[0] == end[0] || start[1] == end[1]) {
+      return false;
+    } 
 
-    else if(squareStart['color'] != pieceDetails['color']) {
-      let startIndex = Board.LETTERS.indexOf(start[0]);
-      let endIndex = Board.LETTERS.indexOf(end[0]);
+    //* start letter index is less than end letter index.
+    if (startIndex < endIndex) {
 
-      //* start letter index is less than end letter index.
-      if(startIndex < endIndex) {
-        let countOfSquaresToCollect = Math.abs(endIndex, startIndex);
+      //* start num is less than end num.
+      if (start[1] < end[1]) {
 
-        //* start num is less than end num.
-        if(start[1] < end[1]) {
-          let collectSquares = [];
-          let squareNum = start[1];
+        // create variable for how many items to add to array
+        for (let i = 0; i <= countOfSquaresToCollect; i++) {
+          // letter index to increase, num to increase.
+          collectSquares.push([Board.LETTERS[startIndex + i], squareNum + i]);
 
-          // create variable for how many items to add to array
-          for(let i = 1; i <= countOfSquaresToCollect; i++) {
-            // letter index to increase, num to increase.
-            collectSquares.push([Board.LETTERS[startIndex+i], squareNum+i]);
-
-          }
-          return collectSquares;
         }
-
-        //* start num is higher than end num
-        else if(start[1] > end[1]) {
-          let collectSquares = [];
-          let squareNum = start[1];
-          
-          for(let i = 1; i <= countOfSquaresToCollect; i++) {
-            // letter index needs to increase, num to decrease. 
-            collectSquares.push([Board.LETTERS[startIndex+i], squareNum-i]);
-
-          }
-          return collectSquares;  
-        }
+        return collectSquares;
       }
 
-      //* start letter index higher than end letter index.
-      else if(startIndex > endIndex) {
-        let countOfSquaresToCollect = Math.abs(startIndex, endIndex);
+      //* start num is higher than end num
+      else if (start[1] > end[1]) { 
 
-        //* start num lower than end num.
-        if(start[1] < end[1]) {
-          let collectSquares = [];
-          let squareNum = start[1];
+        for (let i = 1; i <= countOfSquaresToCollect; i++) { 
+          // letter index needs to increase, num to decrease. 
+          collectSquares.push([Board.LETTERS[startIndex + i], squareNum - i]); 
 
-          for(let i = 1; i <= countOfSquaresToCollect; i++) {
-            // letter index to decrease, num to increase.
-            collectSquares.push([Board.LETTERS[startIndex-i], squareNum+i]);
-
-          }
-          return collectSquares;
         }
+        return collectSquares;
+      }
+    }
 
-        else if(start[1] > end[1]) {
-          let collectSquares = [];
-          let squareNum = start[1];
+    //* start letter index higher than end letter index.
+    else if (startIndex > endIndex) {
 
-          for(let i = 1; i <= countOfSquaresToCollect; i++) {
-            // letter index to decrease, num to decrease.
-            collectSquares.push([Board.LETTERS[startIndex-i], squareNum-i]);
+      //* start num lower than end num.
+      if (start[1] < end[1]) {
 
-          }
-          return collectSquares;
+        for (let i = 1; i <= countOfSquaresToCollect; i++) {
+          // letter index to decrease, num to increase.
+          collectSquares.push([Board.LETTERS[startIndex - i], squareNum + i]);
+
         }
+        return collectSquares;
+      }
+
+      else if (start[1] > end[1]) {
+
+        for (let i = 1; i <= countOfSquaresToCollect; i++) {
+          // letter index to decrease, num to decrease.
+          collectSquares.push([Board.LETTERS[startIndex - i], squareNum - i]);
+
+        }
+        return collectSquares;
       }
     }
   }
@@ -534,14 +522,14 @@ function runTest(testValue, expectedResult, description) {
   }
 };
 
-// runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move, down right');
-// runTest(board.makeMove(['c', 3], ['b', 4]), true, 'Bishop makes legal move, up left');
-// runTest(board.makeMove(['c', 3], ['a', 1]), true, 'Bishop makes legal move, down left'); 
-// runTest(board.makeMove(['c', 3], ['e', 5]), true, 'Bishop makes legal move, up right');
-// runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move, not diagonal');
-// runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, cannot land on team piece');
-// runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
-// runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
+runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move, down right');
+runTest(board.makeMove(['c', 3], ['b', 4]), true, 'Bishop makes legal move, up left');
+runTest(board.makeMove(['c', 3], ['a', 1]), true, 'Bishop makes legal move, down left'); 
+runTest(board.makeMove(['c', 3], ['e', 5]), true, 'Bishop makes legal move, up right');
+runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move, not diagonal');
+runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, cannot land on team piece');
+runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
+runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
 
 runTest(board.makeMove(['d', 6], ['a', 6]), true, 'Rook makes legal move, left');
 runTest(board.makeMove(['d', 6], ['d', 4]), true, 'Rook makes legal move, down');
