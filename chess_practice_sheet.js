@@ -191,7 +191,7 @@ class Board {
     let pieceInPlay = squareStart.getPiece();
     // Collects an array of squares in between start and end move, inclusive.
     let inbetweenSquares = pieceInPlay.makeMove(start, end);
-    // console.log(inbetweenSquares, "inbetweenSquares");
+    console.log(inbetweenSquares, "inbetweenSquares");
 
     // Illegal moves will return as empty array.
     if(inbetweenSquares == false) {
@@ -309,10 +309,10 @@ class Bishop extends Piece {
 
    makeMove(start, end) {
     // Diagonal movement only.
-    let startIndex = Board.LETTERS.indexOf(start[0]); 
-    let endIndex = Board.LETTERS.indexOf(end[0]);
-    let countOfSquaresToCollect = Math.abs(endIndex - startIndex); 
-    let squareNum = start[1];
+    let startIndex = Board.LETTERS.indexOf(start[0]); // 3
+    let endIndex = Board.LETTERS.indexOf(end[0]); // 1
+    let countOfSquaresToCollect = Math.abs(endIndex - startIndex); // 2
+    let squareNum = start[1]; // 3
     let collectSquares = [];
 
     // TODO: Consider getting rid of this check, and adding instead a way to see
@@ -321,56 +321,40 @@ class Bishop extends Piece {
       return false;
     } 
 
-    //* start letter index is less than end letter index.
-    if (startIndex < endIndex) {
+    if (startIndex < endIndex && start[1] < end[1]) {
 
-      //* start num is less than end num.
-      if (start[1] < end[1]) {
+      for (let i = 1; i <= countOfSquaresToCollect; i++) {
+        collectSquares.push([Board.LETTERS[startIndex + i], squareNum + i]);
 
-        // create variable for how many items to add to array
-        for (let i = 0; i <= countOfSquaresToCollect; i++) {
-          // letter index to increase, num to increase.
-          collectSquares.push([Board.LETTERS[startIndex + i], squareNum + i]);
-
-        }
-        return collectSquares;
       }
-
-      //* start num is higher than end num
-      else if (start[1] > end[1]) { 
-
-        for (let i = 1; i <= countOfSquaresToCollect; i++) { 
-          // letter index needs to increase, num to decrease. 
-          collectSquares.push([Board.LETTERS[startIndex + i], squareNum - i]); 
-
-        }
-        return collectSquares;
-      }
+      return collectSquares;
     }
 
-    //* start letter index higher than end letter index.
-    else if (startIndex > endIndex) {
+    else if (startIndex < endIndex && start[1] > end[1]) { 
 
-      //* start num lower than end num.
-      if (start[1] < end[1]) {
+      for (let i = 1; i <= countOfSquaresToCollect; i++) { 
+        collectSquares.push([Board.LETTERS[startIndex + i], squareNum - i]); 
 
-        for (let i = 1; i <= countOfSquaresToCollect; i++) {
-          // letter index to decrease, num to increase.
-          collectSquares.push([Board.LETTERS[startIndex - i], squareNum + i]);
-
-        }
-        return collectSquares;
       }
+      return collectSquares;
+    }
+    
+    else if (startIndex > endIndex && start[1] < end[1]) {
 
-      else if (start[1] > end[1]) {
+      for (let i = 1; i <= countOfSquaresToCollect; i++) {
+        collectSquares.push([Board.LETTERS[startIndex - i], squareNum + i]);
 
-        for (let i = 1; i <= countOfSquaresToCollect; i++) {
-          // letter index to decrease, num to decrease.
-          collectSquares.push([Board.LETTERS[startIndex - i], squareNum - i]);
-
-        }
-        return collectSquares;
       }
+      return collectSquares;
+    }
+
+    else if (startIndex > endIndex && start[1] > end[1]) {
+
+      for (let i = 1; i <= countOfSquaresToCollect; i++) {
+        collectSquares.push([Board.LETTERS[startIndex - i], squareNum - i]);
+
+      }
+      return collectSquares;
     }
   }
 }

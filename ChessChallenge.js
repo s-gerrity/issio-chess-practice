@@ -309,10 +309,10 @@ class Bishop extends Piece {
 
   makeMove(start, end) {
     // Diagonal movement only.
-    let startIndex = Board.LETTERS.indexOf(start[0]); 
-    let endIndex = Board.LETTERS.indexOf(end[0]);
+    let startIndex = Board.LETTERS.indexOf(start[0]);
+    let endIndex = Board.LETTERS.indexOf(end[0]); 
     let countOfSquaresToCollect = Math.abs(endIndex - startIndex); 
-    let squareNum = start[1];
+    let squareNum = start[1]; 
     let collectSquares = [];
 
     // TODO: Consider getting rid of this check, and adding instead a way to see
