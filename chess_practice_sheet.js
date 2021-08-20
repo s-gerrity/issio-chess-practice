@@ -320,45 +320,23 @@ class Bishop extends Piece {
     if (start[0] == end[0] || start[1] == end[1]) {
       return false;
     } 
-
-    if (startIndex < endIndex && start[1] < end[1]) {
-
-      for (let i = 1; i <= countOfSquaresToCollect; i++) {
+    for (let i = 1; i <= countOfSquaresToCollect; i++) {
+      if(startIndex < endIndex && start[1] < end[1]) {
         collectSquares.push([Board.LETTERS[startIndex + i], squareNum + i]);
-
-      }
-      return collectSquares;
-    }
-
-    else if (startIndex < endIndex && start[1] > end[1]) { 
-
-      for (let i = 1; i <= countOfSquaresToCollect; i++) { 
-        collectSquares.push([Board.LETTERS[startIndex + i], squareNum - i]); 
-
-      }
-      return collectSquares;
-    }
-    
-    else if (startIndex > endIndex && start[1] < end[1]) {
-
-      for (let i = 1; i <= countOfSquaresToCollect; i++) {
+      } else if (startIndex < endIndex && start[1] > end[1]) {
+        collectSquares.push([Board.LETTERS[startIndex + i], squareNum - i]);
+      } else if (startIndex > endIndex && start[1] < end[1]) {
         collectSquares.push([Board.LETTERS[startIndex - i], squareNum + i]);
-
-      }
-      return collectSquares;
-    }
-
-    else if (startIndex > endIndex && start[1] > end[1]) {
-
-      for (let i = 1; i <= countOfSquaresToCollect; i++) {
+      } else if (startIndex > endIndex && start[1] > end[1]) {
         collectSquares.push([Board.LETTERS[startIndex - i], squareNum - i]);
-
       }
-      return collectSquares;
     }
+    return collectSquares;
   }
 }
-  
+
+
+
 /**
  * @class Rook
  * @todo - finish the class
