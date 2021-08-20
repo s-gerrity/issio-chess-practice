@@ -191,11 +191,18 @@ class Board {
     let pieceInPlay = squareStart.getPiece();
     // Collects an array of squares in between start and end move, inclusive.
     let inbetweenSquares = pieceInPlay.makeMove(start, end);
-    console.log(inbetweenSquares, "inbetweenSquares");
+    // console.log(inbetweenSquares, "inbetweenSquares");
 
     // Illegal moves will return as empty array.
     if(inbetweenSquares == false) {
       return false;
+    }
+
+    // make sure the loop reads the array in order from start to end
+    if (inbetweenSquares[0][0] == end[0]) {
+      if (inbetweenSquares[0][1] == end[1]) {
+        inbetweenSquares = inbetweenSquares.reverse();
+      }
     }
 
     for(let item of inbetweenSquares) {
@@ -211,23 +218,16 @@ class Board {
       if (item[0] == start[0] && item[1] == start[1]) {
         continue;
       }
-      console.log(item, "hi");
       if(pieceValue != null) {
-        // console.log("square piece value is not null");
         if(item[0] == end[0] && item[1] == end[1]) {
-          // console.log("item equals end");
           if(pieceValue['color'] != pieceInPlay['color']) {
             return true;
           }
         }
         return false;
-        // {
-        //   // console.log("aloha");
-        //   return true;   
-        // }
+
       }
       else if(pieceValue == null) {
-        console.log("square does not have a piece on it");
 
         if(item[0] == end[0]) {
           // console.log("the square space column the same as the end square column");
@@ -552,7 +552,6 @@ runTest(board.makeMove(['d', 6], ['f', 6]), false, 'Rook makes illegal move, can
 runTest(board.makeMove(['d', 6], ['d', 3]), true, 'Rook makes legal move, captures opponent');
 runTest(board.makeMove(['d', 6], ['d', 1]), false, 'Rook makes illegal move, cannot jump over pieces');
 
-// // TODO LEFT OFF 8/18: Added min max to Rook. Tests fail because (i think because) the board is not 
-// // assembled properly. Redesigning print(). 
-// // TODO LEFT OFF 8/17: Redoing the Rook makmove function. Some tests fail. Consider adding min max. 
+// // TODO LEFT OFF 8/18: on original doc, find a way to check all squares without exiting the loop early. if end square 
+// is early in the array, it exits the loop before checking if other squares are illegally occupied.
 

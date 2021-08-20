@@ -191,15 +191,22 @@ class Board {
     let pieceInPlay = squareStart.getPiece();
     // Collects an array of squares in between start and end move, inclusive.
     let inbetweenSquares = pieceInPlay.makeMove(start, end);
-    // console.log(inbetweenSquares, "inbetweenSquares");
+    console.log(inbetweenSquares, "inbetweenSquares");
 
     // Illegal moves will return as empty array.
     if (inbetweenSquares == false) {
       return false;
     }
 
+    // make sure the loop reads the array in order from start to end
+    if (inbetweenSquares[0][0] == end[0]) {
+      if (inbetweenSquares[0][1] == end[1]) {
+        inbetweenSquares = inbetweenSquares.reverse();
+      }
+    }
+
     for (let item of inbetweenSquares) {
-      // console.log(item, "item");
+      console.log(item, "item");
       // extract squares from array.
       let retrieveSquare = this.getSquare(item[0], item[1]);
       // console.log(retrieveSquare, "retrieveSquare");
@@ -211,7 +218,7 @@ class Board {
       if (item[0] == start[0] && item[1] == start[1]) {
         continue;
       }
-      
+
       if (pieceValue != null) {
         // console.log("square piece value is not null");
         if (item[0] == end[0] && item[1] == end[1]) {
@@ -221,23 +228,16 @@ class Board {
           }
         }
         return false;
-        // {
-        //   // console.log("aloha");
-        //   return true;   
-        // }
       }
+      // supposed to check if the square is the end and the move is approved
+      // but, it sometimes checks this square first in the array and ends the loop
+      // TODO: find a way to check all squares without exiting the loop early
       else if (pieceValue == null) {
-        // console.log("square does not have a piece on it");
-
         if (item[0] == end[0]) {
-          // console.log("the square space column the same as the end square column");
           if (item[1] == end[1]) {
-            // console.log("the square space row is the same as the end square row, the move is finished");
             return true;
-          }
-          continue;
+          }  
         }
-        continue;
       }
     }
     return false;
@@ -470,14 +470,14 @@ function runTest(testValue, expectedResult, description) {
   }
 };
 
-runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move, down right');
-runTest(board.makeMove(['c', 3], ['b', 4]), true, 'Bishop makes legal move, up left');
-runTest(board.makeMove(['c', 3], ['a', 1]), true, 'Bishop makes legal move, down left');
-runTest(board.makeMove(['c', 3], ['e', 5]), true, 'Bishop makes legal move, up right');
-runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move, not diagonal');
-runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, cannot land on team piece');
-runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
-runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
+// runTest(board.makeMove(['c', 3], ['e', 1]), true, 'Bishop makes legal move, down right');
+// runTest(board.makeMove(['c', 3], ['b', 4]), true, 'Bishop makes legal move, up left');
+// runTest(board.makeMove(['c', 3], ['a', 1]), true, 'Bishop makes legal move, down left');
+// runTest(board.makeMove(['c', 3], ['e', 5]), true, 'Bishop makes legal move, up right');
+// runTest(board.makeMove(['c', 3], ['h', 5]), false, 'Bishop makes illegal move, not diagonal');
+// runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, cannot land on team piece');
+// runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
+// runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
 
 runTest(board.makeMove(['d', 6], ['a', 6]), true, 'Rook makes legal move, left');
 runTest(board.makeMove(['d', 6], ['d', 4]), true, 'Rook makes legal move, down');
