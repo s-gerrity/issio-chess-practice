@@ -308,20 +308,19 @@ class Bishop extends Piece {
    */
 
   makeMove(start, end) {
+    let startIndex = Board.LETTERS.indexOf(start[0]); 
+    let endIndex = Board.LETTERS.indexOf(end[0]);
+    let countOfSquaresToCollect = Math.abs(endIndex - startIndex); 
 
     // Diagonal movement only.
     // TODO: Consider getting rid of this check, and adding instead a way to see
     // if the move is legal. 
     if (start[0] == end[0] || start[1] == end[1]) {
       return false;
-    }
-
-    let startIndex = Board.LETTERS.indexOf(start[0]); 
-    let endIndex = Board.LETTERS.indexOf(end[0]); 
+    } 
 
     //* start letter index is less than end letter index.
     if (startIndex < endIndex) {
-      let countOfSquaresToCollect = Math.abs(endIndex - startIndex); 
 
       //* start num is less than end num.
       if (start[1] < end[1]) {
@@ -354,7 +353,6 @@ class Bishop extends Piece {
 
     //* start letter index higher than end letter index.
     else if (startIndex > endIndex) {
-      let countOfSquaresToCollect = Math.abs(startIndex - endIndex); 
 
       //* start num lower than end num.
       if (start[1] < end[1]) {
