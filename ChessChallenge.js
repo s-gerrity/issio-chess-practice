@@ -318,15 +318,16 @@ class Bishop extends Piece {
       return false;
     }
 
-    let startIndex = Board.LETTERS.indexOf(start[0]);
-    let endIndex = Board.LETTERS.indexOf(end[0]);
+    let startIndex = Board.LETTERS.indexOf(start[0]); // 3
+    let endIndex = Board.LETTERS.indexOf(end[0]); // 5
 
     //* start letter index is less than end letter index.
     if (startIndex < endIndex) {
-      let countOfSquaresToCollect = Math.abs(endIndex, startIndex);
+      let countOfSquaresToCollect = Math.abs(endIndex, startIndex); // 2
+      console.log(countOfSquaresToCollect, "countOfSquaresToCollect");
 
       //* start num is less than end num.
-      if (start[1] < end[1]) {
+      if (start[1] < end[1]) { 
         let collectSquares = [];
         let squareNum = start[1];
 
