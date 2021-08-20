@@ -309,9 +309,9 @@ class Bishop extends Piece {
 
    makeMove(start, end) {
     // Diagonal movement only.
-    let startIndex = Board.LETTERS.indexOf(start[0]); // 3
-    let endIndex = Board.LETTERS.indexOf(end[0]); // 1
-    let countOfSquaresToCollect = Math.abs(endIndex - startIndex); // 2
+    let startLetterIndex = Board.LETTERS.indexOf(start[0]); // 3
+    let endLetterIndex = Board.LETTERS.indexOf(end[0]); // 1
+    let countOfSquaresToCollect = Math.abs(endLetterIndex - startLetterIndex); // 2
     let squareNum = start[1]; // 3
     let collectSquares = [];
 
@@ -322,17 +322,17 @@ class Bishop extends Piece {
     } 
     for (let i = 1; i <= countOfSquaresToCollect; i++) {
 
-      if(startIndex < endIndex && start[1] < end[1]) {
-        collectSquares.push([Board.LETTERS[startIndex + i], squareNum + i]);
+      if (startLetterIndex < endLetterIndex && start[1] < end[1]) {
+        collectSquares.push([Board.LETTERS[startLetterIndex + i], squareNum + i]);
 
-      } else if (startIndex < endIndex && start[1] > end[1]) {
-        collectSquares.push([Board.LETTERS[startIndex + i], squareNum - i]);
+      } else if (startLetterIndex < endLetterIndex && start[1] > end[1]) {
+        collectSquares.push([Board.LETTERS[startLetterIndex + i], squareNum - i]);
 
-      } else if (startIndex > endIndex && start[1] < end[1]) {
-        collectSquares.push([Board.LETTERS[startIndex - i], squareNum + i]);
+      } else if (startLetterIndex > endLetterIndex && start[1] < end[1]) {
+        collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum + i]);
 
-      } else if (startIndex > endIndex && start[1] > end[1]) {
-        collectSquares.push([Board.LETTERS[startIndex - i], squareNum - i]);
+      } else if (startLetterIndex > endLetterIndex && start[1] > end[1]) {
+        collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum - i]);
       }
       else {
         return false;
