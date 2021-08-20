@@ -321,14 +321,21 @@ class Bishop extends Piece {
       return false;
     } 
     for (let i = 1; i <= countOfSquaresToCollect; i++) {
+
       if(startIndex < endIndex && start[1] < end[1]) {
         collectSquares.push([Board.LETTERS[startIndex + i], squareNum + i]);
+
       } else if (startIndex < endIndex && start[1] > end[1]) {
         collectSquares.push([Board.LETTERS[startIndex + i], squareNum - i]);
+
       } else if (startIndex > endIndex && start[1] < end[1]) {
         collectSquares.push([Board.LETTERS[startIndex - i], squareNum + i]);
+
       } else if (startIndex > endIndex && start[1] > end[1]) {
         collectSquares.push([Board.LETTERS[startIndex - i], squareNum - i]);
+      }
+      else {
+        return false;
       }
     }
     return collectSquares;

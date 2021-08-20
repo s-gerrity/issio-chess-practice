@@ -330,6 +330,9 @@ class Bishop extends Piece {
       } else if (startIndex > endIndex && start[1] > end[1]) {
         collectSquares.push([Board.LETTERS[startIndex - i], squareNum - i]);
       }
+      else {
+        return false;
+      }
     }
     return collectSquares;
   }
