@@ -233,10 +233,10 @@ class Board {
       // but, it sometimes checks this square first in the array and ends the loop
       // TODO: find a way to check all squares without exiting the loop early
       else if (pieceValue == null) {
-        if (item[0] == end[0]) {
-          if (item[1] == end[1]) {
-            return true;
-          }
+        if (item[0] == end[0] && item[1] == end[1]) {
+          // if (item[1] == end[1]) {
+          return true;
+          // }
         }
       }
     }
