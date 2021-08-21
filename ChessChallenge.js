@@ -309,10 +309,10 @@ class Bishop extends Piece {
 
    makeMove(start, end) {
     // Diagonal movement only.
-    let startLetterIndex = Board.LETTERS.indexOf(start[0]); // 3
-    let endLetterIndex = Board.LETTERS.indexOf(end[0]); // 1
-    let countOfSquaresToCollect = Math.abs(endLetterIndex - startLetterIndex); // 2
-    let squareNum = start[1]; // 3
+    let startLetterIndex = Board.LETTERS.indexOf(start[0]);
+    let endLetterIndex = Board.LETTERS.indexOf(end[0]);
+    let countOfSquaresToCollect = Math.abs(endLetterIndex - startLetterIndex);
+    let squareNum = start[1];
     let collectSquares = [];
 
     // TODO: Consider getting rid of this check, and adding instead a way to see
@@ -334,6 +334,7 @@ class Bishop extends Piece {
       } else if (startLetterIndex > endLetterIndex && start[1] > end[1]) {
         collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum - i]);
       }
+      // TODO: return empty array instead.
       else {
         return false;
       }
@@ -365,12 +366,9 @@ class Rook extends Piece {
 
     // Verical movement only
     if (start[0] == end[0]) {
-      let value = start[0]; // d
-      let startAndEnd = [start[1], end[1]];
-
-      // TODO: remove "apply" from min max.
-      var min = Math.min.apply(null, startAndEnd),
-        max = Math.max.apply(null, startAndEnd);
+      let value = start[0],
+          min = Math.min(start[1], end[1]),
+          max = Math.max(start[1], end[1]);
 
       for (let i = min; i <= max; i++) {
         collectSquares.push([value, i]);
@@ -380,12 +378,11 @@ class Rook extends Piece {
 
     // Horizontal movement only.
     else if (start[1] == end[1]) {
-      let value = start[1];
-      let startAndEnd = [Board.LETTERS.indexOf(start[0]),
-      Board.LETTERS.indexOf(end[0])];
-
-      var min = Math.min.apply(null, startAndEnd),
-        max = Math.max.apply(null, startAndEnd);
+      let value = start[1],
+          min = Math.min(Board.LETTERS.indexOf(start[0]),
+                Board.LETTERS.indexOf(end[0])),
+          max = Math.max(Board.LETTERS.indexOf(start[0]),
+                Board.LETTERS.indexOf(end[0]));
 
       for (let i = min; i <= max; i++) {
         collectSquares.push([Board.LETTERS[i], value]);
