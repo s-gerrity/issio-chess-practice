@@ -184,9 +184,12 @@ class Board {
 
   makeMove(start, end) {
     // Collects all squares in a move, checks if pieces are on the squares in the move and if they're legal.
-
+    let startLetter = start[0];
+    let startNum = start[1];
+    let endLetter = end[0];
+    let endNum = end[1];
     // Find the piece making the move and execute the pieces move.
-    let squareStart = this.getSquare(start[0], start[1]),
+    let squareStart = this.getSquare(startLetter, startNum),
         pieceInPlay = squareStart.getPiece(),
     // Collects an array of squares in between start and end move, inclusive.
         inbetweenSquares = pieceInPlay.makeMove(start, end);
@@ -198,33 +201,32 @@ class Board {
     }
 
     // make sure the loop reads the array in order from start to end
-    if (inbetweenSquares[0][0] == end[0]) {
-      if (inbetweenSquares[0][1] == end[1]) {
+    if (inbetweenSquares[0][0] == endLetter) {
+      if (inbetweenSquares[0][1] == endNum) {
         inbetweenSquares = inbetweenSquares.reverse();
       }
     }
 
     for(let item of inbetweenSquares) {
       // console.log(item, "item");
+      let arrayItemLetter = item[0];
+      let arrayItemNum = item[1];
+
       // extract squares from array.
-      let retrieveSquare = this.getSquare(item[0], item[1]);
+      let retrieveSquare = this.getSquare(arrayItemLetter, arrayItemNum);
       // console.log(retrieveSquare, "retrieveSquare");
       // check if there is a piece on the square.
       let pieceValue = retrieveSquare.getPiece();
       // console.log(pieceValue, "pieceValue");
-      let arrayLetter = item[0];
-      let startLetter = start[0];
-      let arrayNum = item[1];
-      let startNum = start[1];
 
       // if item is the start square, pass it
-      if (item[0] == start[0] && item[1] == start[1]) {
+      if (arrayItemLetter == startLetter && arrayItemNum == startNum) {
         continue;
       }
       
       // if the end square has a same-team piece on it, the move fails  
       if(pieceValue != null) {
-        if(item[0] == end[0] && item[1] == end[1]) {
+        if(arrayItemLetter == endLetter && arrayItemNum == endNum) {
           if(pieceValue['color'] != pieceInPlay['color']) {
             return true;
           }
@@ -236,7 +238,7 @@ class Board {
       // if the square is empty, check if it's the end square. if its still empty, the move passes. 
       else if (pieceValue == null) {
 
-        if (item[0] == end[0] && item[1] == end[1]) {
+        if (arrayItemLetter == endLetter && arrayItemNum == endNum) {
           return true;
         }
       }
