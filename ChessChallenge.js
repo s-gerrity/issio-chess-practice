@@ -195,7 +195,7 @@ class Board {
     // console.log(inbetweenSquares, "inbetweenSquares");
 
     // Illegal moves will return as empty array.
-    if(inbetweenSquares == false) {
+    if(inbetweenSquares.length == []) {
       return false;
     }
 
@@ -324,7 +324,7 @@ class Bishop extends Piece {
     // TODO: Consider getting rid of this check, and adding instead a way to see
     // if the move is legal. 
     if (startLetter == endLetter || startNum == endNum) {
-      return false;
+      return [];
     } 
 
     // TODO: Add a helper function to reduce repetition
@@ -343,7 +343,7 @@ class Bishop extends Piece {
         collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum - i]);
       }
       else {
-        return false;
+        return [];
       }
     }
     return collectSquares;
@@ -396,7 +396,7 @@ class Rook extends Piece {
       return collectSquares;
     }
     else {
-      return false;
+      return [];
     }
   }
 }
