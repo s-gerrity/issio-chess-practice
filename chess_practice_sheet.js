@@ -117,25 +117,25 @@ class Board {
 
   print() {
     
-    for (let i = Board.HEIGHT; i > 0; i -= 1) {  
+    for (let i = Board.HEIGHT; i > 0; i -= 1) {
       let rowString = i + ": ";
-      
-    for (let j = 1; j <= Board.WIDTH; j += 1) {
-      let letter = Board.LETTERS[j];
-      let square = board.getSquare(letter, i); 
-      let piece = square.getPiece();
-      if (piece == null) {
-        rowString += "[ ]";
+
+      for (let j = 1; j <= Board.WIDTH; j += 1) {
+        let letter = Board.LETTERS[j],
+            square = board.getSquare(letter, i),
+            piece = square.getPiece();
+
+        if (piece == null) {
+          rowString += "[ ]";
+        }
+        else {
+          let firstLetterOfPiece = piece.type[0];
+          rowString += "[" + firstLetterOfPiece + "]";
+        }
       }
-      else {
-        let firstLetterOfPiece = piece.type[0];
-        // console.log(piece, "piece", square, "square");
-        rowString += "[" + firstLetterOfPiece + "]";
-      }
-    }
       console.log(rowString);
+    }
   }
-}
 
   /**
    * @methdd getSquare - returns the selected square
@@ -186,12 +186,11 @@ class Board {
     // Collects all squares in a move, checks if pieces are on the squares in the move and if they're legal.
 
     // Find the piece making the move and execute the pieces move.
-    let squareStart = this.getSquare(start[0], start[1]);
-    // console.log(squareStart, "squareStart");
-    let pieceInPlay = squareStart.getPiece();
+    let squareStart = this.getSquare(start[0], start[1]),
+        pieceInPlay = squareStart.getPiece(),
     // Collects an array of squares in between start and end move, inclusive.
-    let inbetweenSquares = pieceInPlay.makeMove(start, end);
-    console.log(inbetweenSquares, "inbetweenSquares");
+        inbetweenSquares = pieceInPlay.makeMove(start, end);
+    // console.log(inbetweenSquares, "inbetweenSquares");
 
     // Illegal moves will return as empty array.
     if(inbetweenSquares == false) {
@@ -213,11 +212,17 @@ class Board {
       // check if there is a piece on the square.
       let pieceValue = retrieveSquare.getPiece();
       // console.log(pieceValue, "pieceValue");
+      let arrayLetter = item[0];
+      let startLetter = start[0];
+      let arrayNum = item[1];
+      let startNum = start[1];
 
       // if item is the start square, pass it
       if (item[0] == start[0] && item[1] == start[1]) {
         continue;
       }
+      
+      // if the end square has a same-team piece on it, the move fails  
       if(pieceValue != null) {
         if(item[0] == end[0] && item[1] == end[1]) {
           if(pieceValue['color'] != pieceInPlay['color']) {
@@ -227,17 +232,13 @@ class Board {
         return false;
 
       }
-      else if(pieceValue == null) {
 
-        if(item[0] == end[0]) {
-          // console.log("the square space column the same as the end square column");
-          if(item[1] == end[1]) {
-            // console.log("the square space row is the same as the end square row, the move is finished");
-            return true;
-          }
-          continue;
-        } 
-        continue;
+      // if the square is empty, check if it's the end square. if its still empty, the move passes. 
+      else if (pieceValue == null) {
+
+        if (item[0] == end[0] && item[1] == end[1]) {
+          return true;
+        }
       }
     }
     return false;
@@ -309,17 +310,19 @@ class Bishop extends Piece {
 
    makeMove(start, end) {
     // Diagonal movement only.
-    let startLetterIndex = Board.LETTERS.indexOf(start[0]); 
-    let endLetterIndex = Board.LETTERS.indexOf(end[0]); 
-    let countOfSquaresToCollect = Math.abs(endLetterIndex - startLetterIndex); 
-    let squareNum = start[1];
-    let collectSquares = [];
+    let startLetterIndex = Board.LETTERS.indexOf(start[0]),
+        endLetterIndex = Board.LETTERS.indexOf(end[0]),
+        countOfSquaresToCollect = Math.abs(endLetterIndex - startLetterIndex),
+        squareNum = start[1],
+        collectSquares = [];
 
     // TODO: Consider getting rid of this check, and adding instead a way to see
     // if the move is legal. 
     if (start[0] == end[0] || start[1] == end[1]) {
       return false;
     } 
+
+    // TODO: Add a helper function to reduce repetition
     for (let i = 1; i <= countOfSquaresToCollect; i++) {
 
       if (startLetterIndex < endLetterIndex && start[1] < end[1]) {
@@ -340,6 +343,8 @@ class Bishop extends Piece {
     }
     return collectSquares;
   }
+
+  
 }
 
 
@@ -367,26 +372,26 @@ class Rook extends Piece {
 
     // Verical movement only
     if (start[0] == end[0]) {
-      let value = start[0],
+      let squareLetter = start[0],
           min = Math.min(start[1], end[1]),
           max = Math.max(start[1], end[1]);
 
       for (let i = min; i <= max; i++) {
-        collectSquares.push([value, i]);
+        collectSquares.push([squareLetter, i]);
       }
       return collectSquares;
     }
 
     // Horizontal movement only.
     else if (start[1] == end[1]) {
-      let value = start[1],
+      let squareNum = start[1],
           min = Math.min(Board.LETTERS.indexOf(start[0]),
                 Board.LETTERS.indexOf(end[0])),
           max = Math.max(Board.LETTERS.indexOf(start[0]),
                 Board.LETTERS.indexOf(end[0]));
 
       for (let i = min; i <= max; i++) {
-        collectSquares.push([Board.LETTERS[i], value]);
+        collectSquares.push([Board.LETTERS[i], squareNum]);
       }
       return collectSquares;
     }
@@ -506,5 +511,6 @@ runTest(board.makeMove(['d', 6], ['f', 6]), false, 'Rook makes illegal move, can
 runTest(board.makeMove(['d', 6], ['d', 3]), true, 'Rook makes legal move, captures opponent');
 runTest(board.makeMove(['d', 6], ['d', 1]), false, 'Rook makes illegal move, cannot jump over pieces');
 
-// // TODO LEFT OFF 8/19: bishop tests fail or error from not iterating through loop. 
+// // TODO LEFT OFF 8/23: make new variables for makemove board. this should help code be more readable. 
+// // consider helper functions for bishop makemove instead of if statements inside a for loop
 
