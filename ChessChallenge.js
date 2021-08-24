@@ -308,27 +308,32 @@ class Bishop extends Piece {
         squareNum = start[1],
         collectSquares = [];
 
+    let startLetter = start[0];
+    let startNum = start[1];
+    let endLetter = end[0];
+    let endNum = end[1];
+
     // TODO: Consider getting rid of this check, and adding instead a way to see
     // if the move is legal. 
-    if (start[0] == end[0] || start[1] == end[1]) {
+    if (startLetter == endLetter || startNum == endNum) {
       return false;
     } 
-    
+
+    // TODO: Add a helper function to reduce repetition
     for (let i = 1; i <= countOfSquaresToCollect; i++) {
 
-      if (startLetterIndex < endLetterIndex && start[1] < end[1]) {
+      if (startLetterIndex < endLetterIndex && startNum < endNum) {
         collectSquares.push([Board.LETTERS[startLetterIndex + i], squareNum + i]);
 
-      } else if (startLetterIndex < endLetterIndex && start[1] > end[1]) {
+      } else if (startLetterIndex < endLetterIndex && startNum > endNum) {
         collectSquares.push([Board.LETTERS[startLetterIndex + i], squareNum - i]);
 
-      } else if (startLetterIndex > endLetterIndex && start[1] < end[1]) {
+      } else if (startLetterIndex > endLetterIndex && startNum < endNum) {
         collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum + i]);
 
-      } else if (startLetterIndex > endLetterIndex && start[1] > end[1]) {
+      } else if (startLetterIndex > endLetterIndex && startNum > endNum) {
         collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum - i]);
       }
-      // TODO: return empty array instead.
       else {
         return false;
       }
@@ -336,7 +341,6 @@ class Bishop extends Piece {
     return collectSquares;
   }
 }
-
 /**
  * @class Rook
  * @todo - finish the class
