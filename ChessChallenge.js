@@ -122,8 +122,8 @@ class Board {
 
       for (let j = 1; j <= Board.WIDTH; j += 1) {
         let letter = Board.LETTERS[j],
-            square = board.getSquare(letter, i),
-            piece = square.getPiece();
+          square = board.getSquare(letter, i),
+          piece = square.getPiece();
 
         if (piece == null) {
           rowString += "[ ]";
@@ -181,7 +181,7 @@ class Board {
    * @return {*}
    */
 
-   makeMove(start, end) {
+  makeMove(start, end) {
     // Collects all squares in a move, checks if pieces are on the squares in the move and if they're legal.
     let startLetter = start[0];
     let startNum = start[1];
@@ -189,13 +189,13 @@ class Board {
     let endNum = end[1];
     // Find the piece making the move and execute the pieces move.
     let squareStart = this.getSquare(startLetter, startNum),
-        pieceInPlay = squareStart.getPiece(),
-    // Collects an array of squares in between start and end move, inclusive.
-        inbetweenSquares = pieceInPlay.makeMove(start, end);
+      pieceInPlay = squareStart.getPiece(),
+      // Collects an array of squares in between start and end move, inclusive.
+      inbetweenSquares = pieceInPlay.makeMove(start, end);
     // console.log(inbetweenSquares, "inbetweenSquares");
 
     // Illegal moves will return as empty array.
-    if(inbetweenSquares.length == []) {
+    if (inbetweenSquares.length == []) {
       return false;
     }
 
@@ -206,7 +206,7 @@ class Board {
       }
     }
 
-    for(let item of inbetweenSquares) {
+    for (let item of inbetweenSquares[1]) {
       // console.log(item, "item");
       let arrayItemLetter = item[0];
       let arrayItemNum = item[1];
@@ -219,14 +219,14 @@ class Board {
       // console.log(pieceValue, "pieceValue");
 
       // if item is the start square, pass it
-      if (arrayItemLetter == startLetter && arrayItemNum == startNum) {
-        continue;
-      }
-      
+      // if (arrayItemLetter == startLetter && arrayItemNum == startNum) {
+      //   continue;
+      // }
+
       // if the end square has a same-team piece on it, the move fails  
-      if(pieceValue != null) {
-        if(arrayItemLetter == endLetter && arrayItemNum == endNum) {
-          if(pieceValue['color'] != pieceInPlay['color']) {
+      if (pieceValue != null) {
+        if (arrayItemLetter == endLetter && arrayItemNum == endNum) {
+          if (pieceValue['color'] != pieceInPlay['color']) {
             return true;
           }
         }
@@ -308,13 +308,13 @@ class Bishop extends Piece {
    * @param y
    */
 
-   makeMove(start, end) {
-    // Diagonal movement only.
+  makeMove(start, end) {
+    // Diagonal movement only
     let startLetterIndex = Board.LETTERS.indexOf(start[0]),
-        endLetterIndex = Board.LETTERS.indexOf(end[0]),
-        horizonalMovementSquaresCount = Math.abs(endLetterIndex - startLetterIndex),
-        collectSquares = [],
-        verticalMovementSquaresCount = Math.abs(start[1] - end[1]);
+      endLetterIndex = Board.LETTERS.indexOf(end[0]),
+      horizonalMovementSquaresCount = Math.abs(endLetterIndex - startLetterIndex),
+      collectSquares = [],
+      verticalMovementSquaresCount = Math.abs(start[1] - end[1]);
 
     // check for legal diagonal move: squares moved vertical and horizontal will be the same amount
     if (verticalMovementSquaresCount != horizonalMovementSquaresCount) {
@@ -322,54 +322,33 @@ class Bishop extends Piece {
       return [];
     }
 
-  let bishopMoveArray = [start, end].sort();
-  let minLetter = Board.LETTERS.indexOf(bishopMoveArray[0][0]);
-  let minNum = bishopMoveArray[0][1];
+    let bishopMoveArray = [start, end].sort();
+    let minLetter = Board.LETTERS.indexOf(bishopMoveArray[0][0]);
+    let minNum = bishopMoveArray[0][1];
 
-  // adds letter and num incrementally upward
-  if (bishopMoveArray[0][1] < bishopMoveArray[1][1]) {
-    for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
-      collectSquares.push([Board.LETTERS[minLetter + i], minNum + i]);
+    // adds letter and num incrementally upward
+    if (bishopMoveArray[0][1] < bishopMoveArray[1][1]) {
+      for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
+        collectSquares.push([Board.LETTERS[minLetter + i], minNum + i]);
+      }
     }
-  }
-  // adds letter upward, and num reduces
-  else {
-    for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
-      collectSquares.push([Board.LETTERS[minLetter + i], minNum - i]);
+    // adds letter upward, and num reduces
+    else {
+      for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
+        collectSquares.push([Board.LETTERS[minLetter + i], minNum - i]);
+      }
     }
-  }
 
-  // order the array if it doesn't begin with the start square; the end square will also 
-  // need to be added 
-  if (collectSquares[0] != start) {
-    collectSquares.push(end);
-    collectSquares.reverse();
-  }
+    // order the array if it doesn't begin with the start square; the end square will also 
+    // need to be added 
+    if (collectSquares[0] != start) {
+      collectSquares.push(end);
+      collectSquares.reverse();
+    }
     return collectSquares;
   }
 }
 
-    // // TODO: Add a helper function to reduce repetition
-    // for (let i = 1; i <= countOfSquaresToCollect; i++) {
-
-    //   if (startLetterIndex < endLetterIndex && startNum < endNum) {
-    //     collectSquares.push([Board.LETTERS[startLetterIndex + i], squareNum + i]);
-
-    //   } else if (startLetterIndex < endLetterIndex && startNum > endNum) {
-    //     collectSquares.push([Board.LETTERS[startLetterIndex + i], squareNum - i]);
-
-    //   } else if (startLetterIndex > endLetterIndex && startNum < endNum) {
-    //     collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum + i]);
-
-    //   } else if (startLetterIndex > endLetterIndex && startNum > endNum) {
-    //     collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum - i]);
-    //   }
-    //   else {
-    //     return [];
-    //   }
-    // }
-    // console.log(collectSquares);
-    // return collectSquares;
 
 /**
  * @class Rook
@@ -395,8 +374,8 @@ class Rook extends Piece {
     // Verical movement only
     if (start[0] == end[0]) {
       let squareLetter = start[0],
-          min = Math.min(start[1], end[1]),
-          max = Math.max(start[1], end[1]);
+        min = Math.min(start[1], end[1]),
+        max = Math.max(start[1], end[1]);
 
       for (let i = min; i <= max; i++) {
         collectSquares.push([squareLetter, i]);
@@ -407,10 +386,10 @@ class Rook extends Piece {
     // Horizontal movement only.
     else if (start[1] == end[1]) {
       let squareNum = start[1],
-          min = Math.min(Board.LETTERS.indexOf(start[0]),
-                Board.LETTERS.indexOf(end[0])),
-          max = Math.max(Board.LETTERS.indexOf(start[0]),
-                Board.LETTERS.indexOf(end[0]));
+        min = Math.min(Board.LETTERS.indexOf(start[0]),
+          Board.LETTERS.indexOf(end[0])),
+        max = Math.max(Board.LETTERS.indexOf(start[0]),
+          Board.LETTERS.indexOf(end[0]));
 
       for (let i = min; i <= max; i++) {
         collectSquares.push([Board.LETTERS[i], squareNum]);
