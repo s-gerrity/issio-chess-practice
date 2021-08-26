@@ -313,10 +313,8 @@ class Bishop extends Piece {
     let startLetterIndex = Board.LETTERS.indexOf(start[0]),
         endLetterIndex = Board.LETTERS.indexOf(end[0]),
         horizonalMovementSquaresCount = Math.abs(endLetterIndex - startLetterIndex),
-        collectSquares = [];
-    let startNum = start[1];
-    let endNum = end[1];
-    let verticalMovementSquaresCount = Math.abs(startNum - endNum);
+        collectSquares = [],
+        verticalMovementSquaresCount = Math.abs(start[1] - end[1]);
 
     // check for legal diagonal move: squares moved vertical and horizontal will be the same amount
     if (verticalMovementSquaresCount != horizonalMovementSquaresCount) {
@@ -335,15 +333,12 @@ class Bishop extends Piece {
     }
   }
   // adds letter upward, and num reduces
-  else if (bishopMoveArray[0][1] > bishopMoveArray[1][1]) {
+  else {
     for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
       collectSquares.push([Board.LETTERS[minLetter + i], minNum - i]);
     }
   }
-  else {
-    console.log("Illegal move for a Bishop");
-    return [];
-  }
+
   // order the array if it doesn't begin with the start square; the end square will also 
   // need to be added 
   if (collectSquares[0] != start) {
