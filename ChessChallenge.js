@@ -312,43 +312,70 @@ class Bishop extends Piece {
     // Diagonal movement only.
     let startLetterIndex = Board.LETTERS.indexOf(start[0]),
         endLetterIndex = Board.LETTERS.indexOf(end[0]),
-        countOfSquaresToCollect = Math.abs(endLetterIndex - startLetterIndex),
-        squareNum = start[1],
+        horizonalMovementSquaresCount = Math.abs(endLetterIndex - startLetterIndex),
         collectSquares = [];
-
-    let startLetter = start[0];
     let startNum = start[1];
-    let endLetter = end[0];
     let endNum = end[1];
+    let verticalMovementSquaresCount = Math.abs(startNum - endNum);
 
-    // TODO: Consider getting rid of this check, and adding instead a way to see
-    // if the move is legal. 
-    if (startLetter == endLetter || startNum == endNum) {
+    // check for legal diagonal move: squares moved vertical and horizontal will be the same amount
+    if (verticalMovementSquaresCount != horizonalMovementSquaresCount) {
+      console.log("This move is not allowed for a Bishop. Must be diagonal.");
       return [];
-    } 
-
-    // TODO: Add a helper function to reduce repetition
-    for (let i = 1; i <= countOfSquaresToCollect; i++) {
-
-      if (startLetterIndex < endLetterIndex && startNum < endNum) {
-        collectSquares.push([Board.LETTERS[startLetterIndex + i], squareNum + i]);
-
-      } else if (startLetterIndex < endLetterIndex && startNum > endNum) {
-        collectSquares.push([Board.LETTERS[startLetterIndex + i], squareNum - i]);
-
-      } else if (startLetterIndex > endLetterIndex && startNum < endNum) {
-        collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum + i]);
-
-      } else if (startLetterIndex > endLetterIndex && startNum > endNum) {
-        collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum - i]);
-      }
-      else {
-        return [];
-      }
     }
+
+  let bishopMoveArray = [start, end].sort();
+  let minLetter = Board.LETTERS.indexOf(bishopMoveArray[0][0]);
+  let minNum = bishopMoveArray[0][1];
+
+  // adds letter and num incrementally upward
+  if (bishopMoveArray[0][1] < bishopMoveArray[1][1]) {
+    for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
+      collectSquares.push([Board.LETTERS[minLetter + i], minNum + i]);
+    }
+  }
+  // adds letter upward, and num reduces
+  else if (bishopMoveArray[0][1] > bishopMoveArray[1][1]) {
+    for (let i = 1; i <= horizonalMovementSquaresCount; i++) {
+      collectSquares.push([Board.LETTERS[minLetter + i], minNum - i]);
+    }
+  }
+  else {
+    console.log("Illegal move for a Bishop");
+    return [];
+  }
+  // order the array if it doesn't begin with the start square; the end square will also 
+  // need to be added 
+  if (collectSquares[0] != start) {
+    collectSquares.push(end);
+    collectSquares.reverse();
+  }
     return collectSquares;
   }
 }
+
+    // // TODO: Add a helper function to reduce repetition
+    // for (let i = 1; i <= countOfSquaresToCollect; i++) {
+
+    //   if (startLetterIndex < endLetterIndex && startNum < endNum) {
+    //     collectSquares.push([Board.LETTERS[startLetterIndex + i], squareNum + i]);
+
+    //   } else if (startLetterIndex < endLetterIndex && startNum > endNum) {
+    //     collectSquares.push([Board.LETTERS[startLetterIndex + i], squareNum - i]);
+
+    //   } else if (startLetterIndex > endLetterIndex && startNum < endNum) {
+    //     collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum + i]);
+
+    //   } else if (startLetterIndex > endLetterIndex && startNum > endNum) {
+    //     collectSquares.push([Board.LETTERS[startLetterIndex - i], squareNum - i]);
+    //   }
+    //   else {
+    //     return [];
+    //   }
+    // }
+    // console.log(collectSquares);
+    // return collectSquares;
+
 /**
  * @class Rook
  * @todo - finish the class
@@ -438,12 +465,14 @@ runTest(board.makeMove(['c', 3], ['a', 5]), false, 'Bishop makes illegal move, c
 runTest(board.makeMove(['c', 3], ['f', 6]), true, 'Bishop makes legal move, captures opponent');
 runTest(board.makeMove(['c', 3], ['g', 7]), false, 'Bishop makes illlegal move, cannot jump over pieces');
 
-runTest(board.makeMove(['d', 6], ['a', 6]), true, 'Rook makes legal move, left');
-runTest(board.makeMove(['d', 6], ['d', 4]), true, 'Rook makes legal move, down');
-runTest(board.makeMove(['d', 6], ['e', 6]), true, 'Rook makes legal move, right');
-runTest(board.makeMove(['d', 6], ['d', 8]), true, 'Rook makes legal move, up');
-runTest(board.makeMove(['d', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
-runTest(board.makeMove(['d', 6], ['f', 6]), false, 'Rook makes illegal move, cannot land on team piece');
-runTest(board.makeMove(['d', 6], ['d', 3]), true, 'Rook makes legal move, captures opponent');
-runTest(board.makeMove(['d', 6], ['d', 1]), false, 'Rook makes illegal move, cannot jump over pieces');
+runTest(board.makeMove(['c', 3], ['h', 4]), false, 'BISHOPS DO NOT MOVE THAT WAY');
+
+// runTest(board.makeMove(['d', 6], ['a', 6]), true, 'Rook makes legal move, left');
+// runTest(board.makeMove(['d', 6], ['d', 4]), true, 'Rook makes legal move, down');
+// runTest(board.makeMove(['d', 6], ['e', 6]), true, 'Rook makes legal move, right');
+// runTest(board.makeMove(['d', 6], ['d', 8]), true, 'Rook makes legal move, up');
+// runTest(board.makeMove(['d', 6], ['c', 2]), false, 'Rook makes illegal move, must move horizonal or vertical');
+// runTest(board.makeMove(['d', 6], ['f', 6]), false, 'Rook makes illegal move, cannot land on team piece');
+// runTest(board.makeMove(['d', 6], ['d', 3]), true, 'Rook makes legal move, captures opponent');
+// runTest(board.makeMove(['d', 6], ['d', 1]), false, 'Rook makes illegal move, cannot jump over pieces');
 
