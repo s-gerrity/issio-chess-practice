@@ -192,7 +192,7 @@ class Board {
       pieceInPlay = squareStart.getPiece(),
       // Collects an array of squares in between start and end move, inclusive.
       inbetweenSquares = pieceInPlay.makeMove(start, end);
-    // console.log(inbetweenSquares, "inbetweenSquares");
+    console.log(inbetweenSquares, "inbetweenSquares");
 
     // Illegal moves will return as empty array.
     if (inbetweenSquares.length == []) {
@@ -310,9 +310,8 @@ class Bishop extends Piece {
       horizonalMovementSquaresCount = Math.abs(endLetterIndex - startLetterIndex),
       collectSquares = [],
       verticalMovementSquaresCount = Math.abs(start[1] - end[1]);
-      console.log("the move", start, end);
 
-    // check for legal diagonal move: squares moved vertical and horizontal will be the same amount
+    // check for legal diagonal move: squares moved vertical and horizontal will be the same
     if (verticalMovementSquaresCount != horizonalMovementSquaresCount) {
       console.log("This move is not allowed for a Bishop. Must be diagonal.");
       return [];
@@ -374,28 +373,41 @@ class Rook extends Piece {
     // Verical movement only
     if (start[0] == end[0]) {
       let squareLetter = start[0],
-        min = Math.min(start[1], end[1]),
-        max = Math.max(start[1], end[1]);
+          min = Math.min(start[1], end[1]),
+          max = Math.max(start[1], end[1]);
 
       for (let i = min; i <= max; i++) {
         collectSquares.push([squareLetter, i]);
       }
+      // reorder array if it starts with the end square
+      if (collectSquares[0][0] == end[0] && collectSquares[0][1] == end[1]) {
+        collectSquares.reverse();
+      }
+      // skips the start square
+      collectSquares.shift()    
       return collectSquares;
     }
 
     // Horizontal movement only.
     else if (start[1] == end[1]) {
       let squareNum = start[1],
-        min = Math.min(Board.LETTERS.indexOf(start[0]),
-          Board.LETTERS.indexOf(end[0])),
-        max = Math.max(Board.LETTERS.indexOf(start[0]),
-          Board.LETTERS.indexOf(end[0]));
+          min = Math.min(Board.LETTERS.indexOf(start[0]),
+                Board.LETTERS.indexOf(end[0])),
+          max = Math.max(Board.LETTERS.indexOf(start[0]),
+                Board.LETTERS.indexOf(end[0]));
 
       for (let i = min; i <= max; i++) {
         collectSquares.push([Board.LETTERS[i], squareNum]);
       }
+      // reorder array if it starts with the end square
+      if (collectSquares[0][0] == end[0] && collectSquares[0][1] == end[1]) {
+        collectSquares.reverse();
+      }
+      // skips the start square
+      collectSquares.shift()    
       return collectSquares;
     }
+
     else {
       return [];
     }
