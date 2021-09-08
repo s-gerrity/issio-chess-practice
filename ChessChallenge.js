@@ -189,10 +189,10 @@ class Board {
     let endNum = end[1];
     // Find the piece making the move and execute the pieces move.
     let squareStart = this.getSquare(startLetter, startNum),
-      pieceInPlay = squareStart.getPiece(),
+        pieceInPlay = squareStart.getPiece(),
       // Collects an array of squares in between start and end move, inclusive.
-      inbetweenSquares = pieceInPlay.makeMove(start, end);
-    console.log(inbetweenSquares, "inbetweenSquares");
+        inbetweenSquares = pieceInPlay.makeMove(start, end);
+    // console.log(inbetweenSquares, "inbetweenSquares");
 
     // Illegal moves will return as empty array.
     if (inbetweenSquares.length == []) {
@@ -213,10 +213,8 @@ class Board {
 
       // extract squares from array.
       let retrieveSquare = this.getSquare(arrayItemLetter, arrayItemNum);
-      // console.log(retrieveSquare, "retrieveSquare");
       // check if there is a piece on the square.
       let pieceValue = retrieveSquare.getPiece();
-      // console.log(pieceValue, "pieceValue");
 
       // if the end square has a same-team piece on it, the move fails  
       if (pieceValue != null) {
@@ -328,6 +326,7 @@ class Bishop extends Piece {
         collectSquares.push([Board.LETTERS[minLetter + i], minNum + i]);
       }
     }
+
     // adds letter upward, and num reduces
     else {
       collectSquares.push(bishopMoveArray[0]);
@@ -335,8 +334,8 @@ class Bishop extends Piece {
         collectSquares.push([Board.LETTERS[minLetter + i], minNum - i]);
       }
     }
-    // order the array if it doesn't begin with the start square; the end square will also 
-    // need to be added 
+
+    // reverse array if it begins with the end square
     if (collectSquares[0][0] == end[0] && collectSquares[0][1] == end[1]) {
       collectSquares.reverse();
     }
@@ -379,7 +378,7 @@ class Rook extends Piece {
       for (let i = min; i <= max; i++) {
         collectSquares.push([squareLetter, i]);
       }
-      // reorder array if it starts with the end square
+      // reverse array if it begins with the end square
       if (collectSquares[0][0] == end[0] && collectSquares[0][1] == end[1]) {
         collectSquares.reverse();
       }
@@ -388,7 +387,7 @@ class Rook extends Piece {
       return collectSquares;
     }
 
-    // Horizontal movement only.
+    // Horizontal movement only
     else if (start[1] == end[1]) {
       let squareNum = start[1],
           min = Math.min(Board.LETTERS.indexOf(start[0]),
@@ -399,7 +398,7 @@ class Rook extends Piece {
       for (let i = min; i <= max; i++) {
         collectSquares.push([Board.LETTERS[i], squareNum]);
       }
-      // reorder array if it starts with the end square
+      // reverse array if it begins with the end square
       if (collectSquares[0][0] == end[0] && collectSquares[0][1] == end[1]) {
         collectSquares.reverse();
       }
@@ -409,6 +408,7 @@ class Rook extends Piece {
     }
 
     else {
+      console.log("Rooks do not move that way");
       return [];
     }
   }
