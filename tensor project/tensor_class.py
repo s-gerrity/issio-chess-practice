@@ -1,6 +1,6 @@
 class Tensor():
 
-    # instantiate the tensor object
+    # Initializer
     def __init__(self, data, shape):
         self.data = data
         self.shape = shape
@@ -12,7 +12,8 @@ class Tensor():
     # the data is structured inside the object.
     def shape_data(self, data, shape):
 
-        # If the data is not empty, an alternative path would be added to the method
+        # TODO: This method only handles an empty data list; need to make it work for
+        # data with nums
         if data == []:
             # If the shape is more than one digit, it has nested loops
             if len(shape) > 1:
@@ -26,7 +27,7 @@ class Tensor():
                 # Assign the data as a 0 when none is given
                 data = 0
 
-                # Make a sample list of data inserted in the tensor and save as variable
+                # Make a list for the innermost list
                 for i in range(append_zeroes):
                     zeroes_per_list.append(data)
                 
@@ -36,7 +37,7 @@ class Tensor():
                         tensor_list_result.append(zeroes_per_list)
                 return tensor_list_result
 
-            # If shape only has one digit to add data
+            # For one-dimensional list only 
             else:
                 tensor_list_result = []
                 data = 0
