@@ -1,14 +1,51 @@
 def transform_tensor_single_digit(data, shape):
-    shape.reverse()
 
     if data == []:
-        lst = []
-        for i in shape:
-            for i in range(i):
-                lst.append(0)
-        return print(lst)
+        if len(shape) > 1:
+            append_zeroes = shape[0]
+            iterate_lst = shape[1:]
+            iterate_lst.reverse()
+            zeroes = []
+            result = []
+            data = 0
+            for i in range(append_zeroes):
+                zeroes.append(data)
+            
+            for k in iterate_lst:
+                for j in range(k):
+                    result.append(zeroes)
+            return result
+
+        else:
+            result = []
+            data = 0
+
+            for i in shape:
+                j = 0
+                while j < i:
+                    result.append(data)
+                    j += 1
+            return result
 
 
+
+
+# [[[0], [0]], [[0], [0]], [[0], [0]]] 1, 2, 3
+
+
+
+def sum_recursive(current_number, accumulated_sum):
+    # Base case
+    # Return the final state
+    if current_number == 11:
+        return accumulated_sum
+
+    # Recursive case
+    # Thread the state through the recursive call
+    else:
+        return sum_recursive(current_number + 1, accumulated_sum + current_number)
+
+sum_recursive(1, 0)
 
 # def transform_tensor(data, shape):
 #     shape.reverse()
@@ -43,69 +80,6 @@ def transform_tensor_single_digit(data, shape):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-# def new_dat(shape):
-#     total = 0
-#     k = 0
-#     zero_datas = []
-    
-#     for i in shape:
-#         if k < len(shape)-1:
-#             print(len(shape)-1, "bye")
-#             print(k, "k")
-
-#             print(i, "i")
-#             total += (i * int(shape[k+1]))
-#             print(total, "hi")
-#             k += 1
-    
-#     for i in range(total):
-#         zero_datas.append(0)
-
-#     return print(zero_datas, "zero_datas")
-
-#pseudocode
-# three times add a zero once
-
-# shape 1, 3    
-# [[0], [0], [0]]
-
-        # for i in shape:
-        #     lst = []
-        #     # print(i)
-        #     j = 0
-        #     # appended_lst = appending_to_lst(lst)
-
-        #     while j < i:
-        #         print(j, "j")
-        #         lst.append(0)
-        #         j += 1
-    
-
-    # for i in shape:
-    #     j = 0
-    #     lst = []
-    #     def add_data(j, lst):
-    #         while j <= i: 
-    #             lst.append(0)
-    #             j += 1
-    #             add_data(j, lst)
-            
-
-
-
-
 data0 = []
 shape4 = [4]
 shape13 = [1, 3]
@@ -121,7 +95,7 @@ def run_test(testValue, expectedResult, description):
         print('    ❌ Test failed!')
 
 
-# run_test(transform_tensor_single_digit(data0, shape4), [0, 0, 0, 0], "Four single zeroes")
-run_test(transform_tensor_single_digit(data0, shape4), [[0], [0], [0]], "Three sets of zero")
-# run_test(transform_tensor(data0, shape23), [[0, 0], [0, 0], [0, 0]], "Three sets of two zeroes")
-# run_test(transform_tensor(data0, shape123), [[[0], [0]], [[0], [0]], [[0], [0]]], "Three sets of two sets of single zeroes")
+run_test(transform_tensor_single_digit(data0, shape4), [0, 0, 0, 0], "Four single zeroes")
+run_test(transform_tensor_single_digit(data0, shape13), [[0], [0], [0]], "Three sets of zero")
+run_test(transform_tensor_single_digit(data0, shape23), [[0, 0], [0, 0], [0, 0]], "Three sets of two zeroes")
+run_test(transform_tensor_single_digit(data0, shape123), [[[0], [0]], [[0], [0]], [[0], [0]]], "Three sets of two sets of single zeroes")
