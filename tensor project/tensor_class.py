@@ -1,57 +1,71 @@
 class Tensor():
 
+    # instantiate the tensor object
     def __init__(self, data, shape):
         self.data = data
         self.shape = shape
-        # not sure what to put for the tensor, but they had this field in the sample
-        self.tensor = "aloha"
+        self.tensor = self.shape_data(data, shape)
+        
 
+    # @method shape_data
+    # Take in data to transform into a tensor. The shape determines how
+    # the data is structured inside the object.
+    def shape_data(self, data, shape):
 
-
-    def transform_tensor_single_digit(self, data, shape):
-
+        # If the data is not empty, an alternative path would be added to the method
         if data == []:
+            # If the shape is more than one digit, it has nested loops
             if len(shape) > 1:
+                # The amount of zeroes per list
                 append_zeroes = shape[0]
-                iterate_lst = shape[1:]
-                iterate_lst.reverse()
-                zeroes = []
-                result = []
+                iterate_shape = shape[1:]
+                # Start with the outer list and work inward
+                iterate_shape.reverse()
+                zeroes_per_list = []
+                tensor_list_result = []
+                # Assign the data as a 0 when none is given
                 data = 0
+
+                # Make a sample list of data inserted in the tensor and save as variable
                 for i in range(append_zeroes):
-                    zeroes.append(data)
+                    zeroes_per_list.append(data)
                 
-                for k in iterate_lst:
-                    for j in range(k):
-                        result.append(zeroes)
-                return result
+                # Each shape argument is iterated over and adds the data
+                for num in iterate_shape:
+                    for j in range(num):
+                        tensor_list_result.append(zeroes_per_list)
+                return tensor_list_result
 
+            # If shape only has one digit to add data
             else:
-                result = []
+                tensor_list_result = []
                 data = 0
 
-                for i in shape:
+                for num in shape:
                     j = 0
-                    while j < i:
-                        result.append(data)
+                    while j < num:
+                        tensor_list_result.append(data)
                         j += 1
-                return result
+                return tensor_list_result
 
 
 ######### Instantiation & Testing ############
 
+# Test data inputs
 data_none = []
 shape4 = [4]
 shape13 = [1, 3]
 shape23 = [2, 3]
 shape123 = [1, 2, 3]
 
+# Create tensor objects
 tensor1 = Tensor(data_none, shape4)
 tensor2 = Tensor(data_none, shape13)
 tensor3 = Tensor(data_none, shape23)
 tensor4 = Tensor(data_none, shape123)
 
 
+# Test function
 def run_test(testValue, expectedResult, description):
     print(description)
     if (testValue == expectedResult):
@@ -59,8 +73,8 @@ def run_test(testValue, expectedResult, description):
     else:
         print('    ❌ Test failed!')
 
-
-run_test(tensor1.transform_tensor_single_digit([], [4]), [0, 0, 0, 0], "4 zeroes")
-run_test(tensor2.transform_tensor_single_digit(data_none, shape13), [[0], [0], [0]], "Three sets of zero")
-run_test(tensor3.transform_tensor_single_digit(data_none, shape23), [[0, 0], [0, 0], [0, 0]], "Three sets of two zeroes")
-run_test(tensor4.transform_tensor_single_digit(data_none, shape123), [[[0], [0]], [[0], [0]], [[0], [0]]], "Three sets of two sets of single zeroes")
+# Tests
+run_test(tensor1.tensor, [0, 0, 0, 0], "4 zeroes")
+run_test(tensor2.tensor, [[0], [0], [0]], "Three sets of zero")
+run_test(tensor3.tensor, [[0, 0], [0, 0], [0, 0]], "Three sets of two zeroes")
+run_test(tensor4.tensor, [[[0], [0]], [[0], [0]], [[0], [0]]], "Three sets of two sets of single zeroes")

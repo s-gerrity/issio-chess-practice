@@ -30,22 +30,25 @@ def transform_tensor_single_digit(data, shape):
 
 
 
+
+
+
 # [[[0], [0]], [[0], [0]], [[0], [0]]] 1, 2, 3
 
 
 
-def sum_recursive(current_number, accumulated_sum):
-    # Base case
-    # Return the final state
-    if current_number == 11:
-        return accumulated_sum
+# def sum_recursive(current_number, accumulated_sum):
+#     # Base case
+#     # Return the final state
+#     if current_number == 11:
+#         return accumulated_sum
 
-    # Recursive case
-    # Thread the state through the recursive call
-    else:
-        return sum_recursive(current_number + 1, accumulated_sum + current_number)
+#     # Recursive case
+#     # Thread the state through the recursive call
+#     else:
+#         return sum_recursive(current_number + 1, accumulated_sum + current_number)
 
-sum_recursive(1, 0)
+# sum_recursive(1, 0)
 
 # def transform_tensor(data, shape):
 #     shape.reverse()
