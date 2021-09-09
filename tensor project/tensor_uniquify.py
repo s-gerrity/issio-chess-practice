@@ -1,29 +1,59 @@
-def transform_tensor(data, shape):
+def transform_tensor_single_digit(data, shape):
     shape.reverse()
-    items_per = shape[-1]
-    shape_repeat = shape[:-1]
 
     if data == []:
+        lst = []
+        for i in shape:
+            for i in range(i):
+                lst.append(0)
+        return print(lst)
+
+
+
+# def transform_tensor(data, shape):
+#     shape.reverse()
+#     items_per = shape[-1]
+#     shape_repeat = shape[:-1]
+
+#     if data == []:
     
-        main_lst = []
-        for i in shape_repeat:
+#         main_lst = []
+#         for i in shape_repeat:
 
-            k = 0
-            while k < i:
-                lst = []
-                lst = appending(lst, main_lst, items_per)
-                k += 1
-        print(main_lst)
-        return main_lst
+#             k = 0
+#             while k < i:
+#                 lst = []
+#                 lst = appending(lst, main_lst, items_per)
+#                 k += 1
+#         print(main_lst)
+#         return main_lst
 
 
 
-def appending(lst, main_lst, items_per):
-    for j in range(items_per):
-        lst.append(0)
+# def appending(lst, main_lst, items_per):
+#     for j in range(items_per):
+#         lst.append(0)
 
-        main_lst.append(lst)
-    return main_lst
+#         main_lst.append(lst)
+#     return main_lst
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # def new_dat(shape):
 #     total = 0
@@ -72,17 +102,7 @@ def appending(lst, main_lst, items_per):
     #             j += 1
     #             add_data(j, lst)
             
-def transform_tensor_single_digit(data, shape):
 
-    if data == []:
-
-        lst = []
-        for i in shape:
-            j = 0
-            while j < i:
-                lst.append(0)
-                j += 1
-        return lst
 
 
 
@@ -102,6 +122,6 @@ def run_test(testValue, expectedResult, description):
 
 
 # run_test(transform_tensor_single_digit(data0, shape4), [0, 0, 0, 0], "Four single zeroes")
-run_test(transform_tensor(data0, shape13), [[0], [0], [0]], "Three sets of zero")
+run_test(transform_tensor_single_digit(data0, shape4), [[0], [0], [0]], "Three sets of zero")
 # run_test(transform_tensor(data0, shape23), [[0, 0], [0, 0], [0, 0]], "Three sets of two zeroes")
 # run_test(transform_tensor(data0, shape123), [[[0], [0]], [[0], [0]], [[0], [0]]], "Three sets of two sets of single zeroes")
