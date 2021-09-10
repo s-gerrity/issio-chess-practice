@@ -1,3 +1,16 @@
+# tensor shape - 2, 3
+[[0, 0], [0, 0], [0, 0]]
+
+# tensor shape - 3, 2
+[[0, 0, 0], [0, 0, 0]]
+
+# tensor shape - 1, 2, 3
+[[[0], [0]], [[0], [0]], [[0], [0]]]
+
+# tensor shape - 3, 2, 1
+[[[0, 0, 0], [0, 0, 0]]]
+
+
 class Tensor():
 
     # Initializer
