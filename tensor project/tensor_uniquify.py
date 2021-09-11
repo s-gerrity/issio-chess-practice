@@ -43,20 +43,27 @@ class Tensor():
     # the data is structured inside the object.
     def shaping_data(self, data, shape, result_lst):
         shape.reverse()
+        print(shape, "1 shape")
 
         if len(shape) == 1:
             return result_lst
 
 
         head = int(shape[0])
+        print(head, "head")
+
         for i in range(head):
+            print(i, "i")
+
             result_lst.append([])
+            print(result_lst, "result lst")
         
         shape = shape[1:]
+        print(shape, "2 shape")
     
         result_lst = self.shaping_data(data, shape, result_lst)
 
-        print(result_lst)
+        print(result_lst, "RESULT")
         return result_lst
 
 
@@ -68,13 +75,12 @@ shape4 = [4]
 shape13 = [1, 3]
 shape23 = [2, 3]
 shape123 = [1, 2, 3]
-shape00123 = [0, 0, 1, 2, 3]
 
 # Create tensor objects
 # tensor1 = Tensor(data_none, shape4)
 # tensor2 = Tensor(data_none, shape13)
 # tensor3 = Tensor(data_none, shape23)
-tensor4 = Tensor(data_none, shape123)
+# tensor4 = Tensor(data_none, shape123)
 
 
 # Test function
@@ -89,6 +95,6 @@ def run_test(testValue, expectedResult, description):
 # run_test(tensor1.tensor, [0, 0, 0, 0], "4 zeroes")
 # run_test(tensor2.tensor, [[0], [0], [0]], "Three sets of zero")
 # run_test(tensor3.tensor, [[0, 0], [0, 0], [0, 0]], "Three sets of two zeroes")
-run_test(tensor4.tensor, [[[0], [0]], [[0], [0]], [[0], [0]]], "Three sets of two sets of single zeroes")
+# run_test(tensor4.tensor, [[[0], [0]], [[0], [0]], [[0], [0]]], "Three sets of two sets of single zeroes")
 
 
