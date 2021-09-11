@@ -45,24 +45,24 @@
 
 # print(sum_recursive(1, 0))
 
-# def list_sum_recursive(input_list):
-#     # Base case
-#     if input_list == []:
-#         return 0
+def list_sum_recursive(input_list):
+    # Base case
+    if input_list == []:
+        return 0
 
-#     # Recursive case
-#     # Decompose the original problem into simpler instances of the same problem
-#     # by making use of the fact that the input is a recursive data structure
-#     # and can be deﬁned in terms of a smaller version of itself
-#     else:
-#         print(input_list, "input list")
-#         head = input_list[0]
-#         print(head, "head")
-#         smaller_list = input_list[1:]
-#         # print("head: " + str(head) + " result of recursion: " + str(list_sum_recursive(smaller_list)))
-#         print(smaller_list, "smaller_list")
+    # Recursive case
+    # Decompose the original problem into simpler instances of the same problem
+    # by making use of the fact that the input is a recursive data structure
+    # and can be deﬁned in terms of a smaller version of itself
+    else:
+        print(input_list, "input list")
+        head = input_list[0]
+        print(head, "head")
+        smaller_list = input_list[1:]
+        # print("head: " + str(head) + " result of recursion: " + str(list_sum_recursive(smaller_list)))
+        print(smaller_list, "smaller_list")
 
-#         return head * list_sum_recursive(smaller_list)
+        return head + list_sum_recursive(smaller_list)
 
 # print(list_sum_recursive([1, 2, 3]))
 
@@ -79,44 +79,66 @@
 # print(flatten(['a', ['b', ['c', ['d']], 'e'], 'f']))
 
 
-# def multiply_list_recursively(current_nums, accumulated_total):
-#     # Base case
-#     # Return the final state
-#     if len(current_nums) == 0:
-#         return accumulated_total
+def multiply_list_recursively(current_nums, accumulated_total):
+    # Base case
+    # Return the final state
+    if len(current_nums) == 0:
+        return accumulated_total
 
-#     # Recursive case
-#     # Thread the state through the recursive call
-#     else:
-#         current_number = current_nums[0]
-#         current_nums.remove(current_number)
-#         return multiply_list_recursively(current_nums, accumulated_total * current_number)
+    # Recursive case
+    # Thread the state through the recursive call
+    else:
+        current_number = current_nums[0]
+        current_nums.remove(current_number)
+        return multiply_list_recursively(current_nums, accumulated_total * current_number)
 
-# print(multiply_list_recursively([6, 6, 6], 1))
-
-
-# def list_sum_recursive(input_list):
-#     # Base case
-#     if input_list == []:
-#         return 0
-
-#     # Recursive case
-#     # Decompose the original problem into simpler instances of the same problem
-#     # by making use of the fact that the input is a recursive data structure
-#     # and can be deﬁned in terms of a smaller version of itself
-#     else:
-#         head = input_list[0]
-#         smaller_list = input_list[1:]
-#         result = list_sum_recursive(smaller_list)
-#         print("head: " + str(head) + " result of recursion: " + str(result))
-
-#         return head + result
-
-# print(list_sum_recursive([1, 2, 3]))
+print(multiply_list_recursively([6, 6, 6], 1))
 
 
 # tensor shape - 2, 3
 [[0, 0], [0, 0], [0, 0]]
+shape = [2, 3, 2]
+result_lst = []
+
+def shaping_data(shape, result_lst):
+
+    if len(shape) == 0:
+        return result_lst
+    
+    else:
+        head = shape[0]
+        shape
+        return shaping_data(shape, result_lst.append(head))
+    
+
+print(shaping_data(shape, result_lst))
+
+
+
+
+
+def list_sum_recursive(input_list):
+    # Base case
+    print(input_list, "1 input")
+
+    if input_list == []:
+        return 0
+    # Recursive case
+    # Decompose the original problem into simpler instances of the same problem
+    # by making use of the fact that the input is a recursive data structure
+    # and can be deﬁned in terms of a smaller version of itself
+    else:
+        head = input_list[0]
+        print(head, "head")
+        smaller_list = input_list[1:]
+        print(smaller_list, "smaller")
+        result = list_sum_recursive(smaller_list)
+
+        print("head: " + str(head) + " result of recursion: " + str(result))
+
+        return head + result
+
+print(list_sum_recursive([4, 9, 10]))
 
 
 

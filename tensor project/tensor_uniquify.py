@@ -11,6 +11,7 @@
 [[[0], [0]], [[0], [0]], [[0], [0]]]
 
 
+
 # make an empty space
 # look at the last num in shape
 # divide that space into that num and make empty spaces
@@ -22,6 +23,9 @@
 # add that many cards to the next space
 # do this until there you are out of cards
 # if there are extra spaces, add cards with 0 on them
+
+# shape 1, 2, 3
+[[[], []], [[], []], [[], []]]
 
 
 class Tensor():
@@ -42,7 +46,7 @@ class Tensor():
     # Take in data to transform into a tensor. The shape determines how
     # the data is structured inside the object.
     def shaping_data(self, data, shape, result_lst):
-        shape.reverse()
+        # shape.reverse()
         print(shape, "1 shape")
 
         if len(shape) == 1:
@@ -50,7 +54,7 @@ class Tensor():
 
 
         head = int(shape[0])
-        print(head, "head")
+        print(head, "1 head")
 
         for i in range(head):
             print(i, "i")
@@ -60,10 +64,11 @@ class Tensor():
         
         shape = shape[1:]
         print(shape, "2 shape")
-    
-        result_lst = self.shaping_data(data, shape, result_lst)
+        # shape.reverse()
 
-        print(result_lst, "RESULT")
+        self.shaping_data(data, shape, result_lst)
+
+        # print(result_lst, "RESULT")
         return result_lst
 
 
@@ -80,7 +85,7 @@ shape123 = [1, 2, 3]
 # tensor1 = Tensor(data_none, shape4)
 # tensor2 = Tensor(data_none, shape13)
 # tensor3 = Tensor(data_none, shape23)
-# tensor4 = Tensor(data_none, shape123)
+tensor4 = Tensor(data_none, shape123)
 
 
 # Test function
@@ -98,3 +103,4 @@ def run_test(testValue, expectedResult, description):
 # run_test(tensor4.tensor, [[[0], [0]], [[0], [0]], [[0], [0]]], "Three sets of two sets of single zeroes")
 
 
+print(tensor4.tensor)
