@@ -66,24 +66,6 @@
 
 # print(list_sum_recursive([1, 2, 3]))
 
-
-def multiply_list_recursively(current_nums, accumulated_total):
-    # Base case
-    # Return the final state
-    if len(current_nums) == 0:
-        return accumulated_total
-
-    # Recursive case
-    # Thread the state through the recursive call
-    else:
-        for element in current_nums:
-            current_number = element
-            current_nums.remove(element)
-            return multiply_list_recursively(current_nums, accumulated_total * current_number)
-
-print(multiply_list_recursively([6, 6, 6], 1))
-
-
 # def flatten(mylist):
 #     flatlist = []
 #     for element in mylist:
@@ -95,6 +77,23 @@ print(multiply_list_recursively([6, 6, 6], 1))
 #     return flatlist
   
 # print(flatten(['a', ['b', ['c', ['d']], 'e'], 'f']))
+
+
+# def multiply_list_recursively(current_nums, accumulated_total):
+#     # Base case
+#     # Return the final state
+#     if len(current_nums) == 0:
+#         return accumulated_total
+
+#     # Recursive case
+#     # Thread the state through the recursive call
+#     else:
+#         current_number = current_nums[0]
+#         current_nums.remove(current_number)
+#         return multiply_list_recursively(current_nums, accumulated_total * current_number)
+
+# print(multiply_list_recursively([6, 6, 6], 1))
+
 
 # def list_sum_recursive(input_list):
 #     # Base case
@@ -114,4 +113,10 @@ print(multiply_list_recursively([6, 6, 6], 1))
 #         return head + result
 
 # print(list_sum_recursive([1, 2, 3]))
+
+
+# tensor shape - 2, 3
+[[0, 0], [0, 0], [0, 0]]
+
+
 
