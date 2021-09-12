@@ -45,100 +45,132 @@
 
 # print(sum_recursive(1, 0))
 
-def list_sum_recursive(input_list):
-    # Base case
-    if input_list == []:
-        return 0
+# def list_sum_recursive(input_list):
+#     # Base case
+#     if input_list == []:
+#         return 0
 
-    # Recursive case
-    # Decompose the original problem into simpler instances of the same problem
-    # by making use of the fact that the input is a recursive data structure
-    # and can be deﬁned in terms of a smaller version of itself
-    else:
-        print(input_list, "input list")
-        head = input_list[0]
-        print(head, "head")
-        smaller_list = input_list[1:]
-        # print("head: " + str(head) + " result of recursion: " + str(list_sum_recursive(smaller_list)))
-        print(smaller_list, "smaller_list")
+#     # Recursive case
+#     # Decompose the original problem into simpler instances of the same problem
+#     # by making use of the fact that the input is a recursive data structure
+#     # and can be deﬁned in terms of a smaller version of itself
+#     else:
+#         print(input_list, "input list")
+#         head = input_list[0]
+#         print(head, "head")
+#         smaller_list = input_list[1:]
+#         # print("head: " + str(head) + " result of recursion: " + str(list_sum_recursive(smaller_list)))
+#         print(smaller_list, "smaller_list")
 
-        return head + list_sum_recursive(smaller_list)
+#         return head + list_sum_recursive(smaller_list)
 
-# print(list_sum_recursive([1, 2, 3]))
+# # print(list_sum_recursive([1, 2, 3]))
 
-# def flatten(mylist):
-#     flatlist = []
-#     for element in mylist:
-#         print(element, "ele", type(element))
-#         if type(element) == list:
-#             flatlist += flatten(element)
-#         else:
-#             flatlist += element
-#     return flatlist
+# # def flatten(mylist):
+# #     flatlist = []
+# #     for element in mylist:
+# #         print(element, "ele", type(element))
+# #         if type(element) == list:
+# #             flatlist += flatten(element)
+# #         else:
+# #             flatlist += element
+# #     return flatlist
   
-# print(flatten(['a', ['b', ['c', ['d']], 'e'], 'f']))
+# # print(flatten(['a', ['b', ['c', ['d']], 'e'], 'f']))
 
 
-def multiply_list_recursively(current_nums, accumulated_total):
-    # Base case
-    # Return the final state
-    if len(current_nums) == 0:
-        return accumulated_total
+# def multiply_list_recursively(current_nums, accumulated_total):
+#     # Base case
+#     # Return the final state
+#     if len(current_nums) == 0:
+#         return accumulated_total
 
-    # Recursive case
-    # Thread the state through the recursive call
-    else:
-        current_number = current_nums[0]
-        current_nums.remove(current_number)
-        return multiply_list_recursively(current_nums, accumulated_total * current_number)
+#     # Recursive case
+#     # Thread the state through the recursive call
+#     else:
+#         current_number = current_nums[0]
+#         current_nums.remove(current_number)
+#         return multiply_list_recursively(current_nums, accumulated_total * current_number)
 
-print(multiply_list_recursively([6, 6, 6], 1))
+# print(multiply_list_recursively([6, 6, 6], 1))
 
 
-# tensor shape - 2, 3
-[[0, 0], [0, 0], [0, 0]]
-shape = [2, 3, 2]
-result_lst = []
+# # tensor shape - 2, 3
+# [[0, 0], [0, 0], [0, 0]]
+# shape = [2, 3, 2]
+# result_lst = []
 
-def shaping_data(shape, result_lst):
+# def shaping_data(shape, result_lst):
 
-    if len(shape) == 0:
-        return result_lst
+#     if len(shape) == 0:
+#         return result_lst
     
-    else:
-        head = shape[0]
-        shape
-        return shaping_data(shape, result_lst.append(head))
+#     else:
+#         head = shape[0]
+#         shape
+#         return shaping_data(shape, result_lst.append(head))
     
 
-print(shaping_data(shape, result_lst))
+# print(shaping_data(shape, result_lst))
 
 
 
 
 
-def list_sum_recursive(input_list):
-    # Base case
-    print(input_list, "1 input")
+# def list_sum_recursive(input_list):
+#     # Base case
+#     print(input_list, "1 input")
 
-    if input_list == []:
-        return 0
-    # Recursive case
-    # Decompose the original problem into simpler instances of the same problem
-    # by making use of the fact that the input is a recursive data structure
-    # and can be deﬁned in terms of a smaller version of itself
-    else:
-        head = input_list[0]
-        print(head, "head")
-        smaller_list = input_list[1:]
-        print(smaller_list, "smaller")
-        result = list_sum_recursive(smaller_list)
+#     if input_list == []:
+#         return 0
+#     # Recursive case
+#     # Decompose the original problem into simpler instances of the same problem
+#     # by making use of the fact that the input is a recursive data structure
+#     # and can be deﬁned in terms of a smaller version of itself
+#     else:
+#         head = input_list[0]
+#         print(head, "head")
+#         smaller_list = input_list[1:]
+#         print(smaller_list, "smaller")
+#         result = list_sum_recursive(smaller_list)
 
-        print("head: " + str(head) + " result of recursion: " + str(result))
+#         print("head: " + str(head) + " result of recursion: " + str(result))
 
-        return head + result
+#         return head + result
 
-print(list_sum_recursive([4, 9, 10]))
+# print(list_sum_recursive([4, 9, 10]))
 
 
+data = [8, 6, 3, 5, 9, 1]
+shape = 2
+new_lst = []
 
+def nesting_data(data, shape, new_lst):
+
+    if len(data) == 0:
+        return new_lst
+
+    another = []
+    # for i in range(shape):
+    for item in data[:shape]:
+        # print(item, "item", data[:shape], "data[:shape]")
+        another.append(item)
+        # print(another, "another")
+    
+    new_lst.append(another)
+    # print(new_lst, "new list")
+    data = data[shape:]
+    # print(data, "data")
+        
+    nesting_data(data, shape, new_lst)
+
+    return new_lst
+
+print(nesting_data(data, shape, new_lst))
+
+
+# for num in shape
+# make new list
+# go through data and add that many items to new list
+# remove those items from the data list
+# 
