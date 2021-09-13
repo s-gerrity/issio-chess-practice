@@ -84,10 +84,12 @@ data5 = [44, 59, 383, 6]
 shape23 = [2, 3]
 
 def confirm_data_length(data, accumulated_total):
+
     data_length = len(data)
 
     if data_length == accumulated_total:
         return print("looks good!")
+
     elif data_length < accumulated_total:
         amount_of_data_needed = accumulated_total - data_length
         for i in range(amount_of_data_needed):
@@ -98,31 +100,29 @@ def confirm_data_length(data, accumulated_total):
     
     return data
 
-    
-
 print(confirm_data_length(data7, 6))
 
 
-# def multiply_list_recursively(current_nums, accumulated_total):
-#     # Base case
-#     # Return the final state
-#     if len(current_nums) == 0:
-#         return accumulated_total
+def multiply_list_recursively(current_nums, accumulated_total):
+    # Base case
+    # Return the final state
+    if len(current_nums) == 0:
+        return accumulated_total
 
-#     # Recursive case
-#     # Thread the state through the recursive call
-#     else:
-#         current_number = current_nums[0]
-#         current_nums.remove(current_number)
-#         return multiply_list_recursively(current_nums, accumulated_total * current_number)
+    # Recursive case
+    # Thread the state through the recursive call
+    else:
+        current_number = current_nums[0]
+        current_nums.remove(current_number)
+        return multiply_list_recursively(current_nums, accumulated_total * current_number)
 
-# def multiply_list(numbers):
-#     # Use our recursive method to multiply each number in this list together.
-#     # We pass 1 as the `accumulated_total` since that is the multiplicative
-#     # identity.
-#     return multiply_list_recursively(numbers, 1)
+def multiply_list(numbers):
+    # Use our recursive method to multiply each number in this list together.
+    # We pass 1 as the `accumulated_total` since that is the multiplicative
+    # identity.
+    return multiply_list_recursively(numbers, 1)
 
-# print(multiply_list(shape23))
+print(multiply_list(shape23))
 
 
 # def list_sum_recursive(input_list):
