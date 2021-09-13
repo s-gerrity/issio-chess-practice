@@ -13,9 +13,7 @@ class Tensor():
     def __init__(self, data, shape):
         self.data = data
         self.shape = shape
-        print(shape, "shape1")
         accumulated_total = self.multiply_list(shape)
-        print(shape, "shape2")
         new_data = self.confirm_data_length(data, accumulated_total)
         self.tensor = self.shape_data(new_data, shape)
 
@@ -63,14 +61,11 @@ class Tensor():
     # Take in data to transform into a tensor. The shape determines how
     # the data is structured inside the object.
     def shape_data(self, data, shape):
-        print(shape, "shape3")
 
         if len(shape) == 1:
-            print(data)
             return data
 
         main_lst = []
-        print(shape[0])
         head = int(shape[0])
         i = 0
 
@@ -131,16 +126,20 @@ def run_test(testValue, expectedResult, description):
         print('    ❌ Test failed!')
 
 # Tests
-run_test(tensor1.tensor, [0, 0, 0, 0], "4 data: [0, 0, 0, 0]")
+run_test(tensor1.tensor, [55, 66, 34, 98], "4 data: [0, 0, 0, 0]")
 run_test(tensor2.tensor, [[678], [333], [909]], "Three sets of data: [[0], [0], [0]]")
-run_test(tensor3.tensor, [[0, 0], [0, 0], [0, 0]], "Three sets of two data: [[0, 0], [0, 0], [0, 0]]")
-run_test(tensor4.tensor, [[[0], [0]], [[0], [0]], [[0], [0]]], "Three sets of two sets of single data: [[[0], [0]], [[0], [0]], [[0], [0]]]")
-run_test(tensor5.tensor, [[[0, 0], [0, 0], [0, 0]], 
+run_test(tensor3.tensor, [[0, 89], [0.4, 37], [988887, 2]], "Three sets of two data: [[0, 0], [0, 0], [0, 0]]")
+run_test(tensor4.tensor, [[[0], [89]], [[0.4], [37]], [[988887], [2]]], "Three sets of two sets of single data: [[[0], [0]], [[0], [0]], [[0], [0]]]")
+run_test(tensor5.tensor, [[[8, 6], [3, 5], [9, 1]], 
                           [[0, 0], [0, 0], [0, 0]], 
                           [[0, 0], [0, 0], [0, 0]], 
-                          [[0, 0], [0, 0], [0, 0]]], "Four sets of three sets of two data")
-run_test(tensor6.tensor, [[[0, 0], [0, 0]], [[0, 0], [0, 0]], 
-                          [[0, 0], [0, 0]], [[0, 0], [0, 0]], 
-                          [[0, 0], [0, 0]], [[0, 0], [0, 0]]], "Six sets of two sets of two data")
+                          [[0, 0], [0, 0], [2, 7]]], """Four sets of three sets of two data: [[[0, 0], [0, 0], [0, 0]], 
+                                                                                              [[0, 0], [0, 0], [0, 0]], 
+                                                                                              [[0, 0], [0, 0], [0, 0]], 
+                                                                                              [[0, 0], [0, 0], [0, 0]]]""")
+run_test(tensor6.tensor, [[[8, 6], [3, 5]], [[9, 1], [0, 0]], [[0, 0], [0, 0]], 
+                         [[0, 0], [0, 0]], [[0, 0], [0, 0]], [[0, 0], [2, 7]]], """Six sets of two sets of two data: [[[0, 0], [0, 0]], [[0, 0], [0, 0]], 
+                                                                                                                      [[0, 0], [0, 0]], [[0, 0], [0, 0]], 
+                                                                                                                      [[0, 0], [0, 0]], [[0, 0], [0, 0]]]""")
 
 
