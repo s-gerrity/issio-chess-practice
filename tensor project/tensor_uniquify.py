@@ -1,11 +1,3 @@
-# tensor shape - 2, 3
-
-# check if multiplication identity is met with len of current data
-# if its not, take the diff and append 0's one by one (range)
-# if it is equal length send to func
-# if its too long XXXX
-
-
 
 class Tensor():
 
@@ -13,13 +5,13 @@ class Tensor():
     def __init__(self, data, shape):
         self.data = data
         self.shape = shape
+        #
         accumulated_total = self.multiply_list(shape)
         new_data = self.confirm_data_length(data, accumulated_total)
         self.tensor = self.shape_data(new_data, shape)
 
 
     def confirm_data_length(self, data, accumulated_total):
-
         data_length = len(data)
 
         if data_length == accumulated_total:
@@ -53,7 +45,6 @@ class Tensor():
         # Use our recursive method to multiply each number in this list together.
         # We pass 1 as the `accumulated_total` since that is the multiplicative
         # identity.
-        # print("this is working")
         return self.multiply_list_recursively(numbers, 1)
 
 
@@ -61,7 +52,8 @@ class Tensor():
     # Take in data to transform into a tensor. The shape determines how
     # the data is structured inside the object.
     def shape_data(self, data, shape):
-
+        # Base case
+        # Return the final state
         if len(shape) == 1:
             return data
 
@@ -69,6 +61,7 @@ class Tensor():
         head = int(shape[0])
         i = 0
 
+        # Recursive case
         # Iterate through the data list over and over until all data elements
         # have been moved into the main list
         while len(main_lst) < (len(data)/ head):
@@ -133,13 +126,8 @@ run_test(tensor4.tensor, [[[0], [89]], [[0.4], [37]], [[988887], [2]]], "Three s
 run_test(tensor5.tensor, [[[8, 6], [3, 5], [9, 1]], 
                           [[0, 0], [0, 0], [0, 0]], 
                           [[0, 0], [0, 0], [0, 0]], 
-                          [[0, 0], [0, 0], [2, 7]]], """Four sets of three sets of two data: [[[0, 0], [0, 0], [0, 0]], 
-                                                                                              [[0, 0], [0, 0], [0, 0]], 
-                                                                                              [[0, 0], [0, 0], [0, 0]], 
-                                                                                              [[0, 0], [0, 0], [0, 0]]]""")
+                          [[0, 0], [0, 0], [2, 7]]], "Four sets of three sets of two data: \n[[[0, 0], [0, 0], [0, 0]], \n[[0, 0], [0, 0], [0, 0]], \n[[0, 0], [0, 0], [0, 0]], \n[[0, 0], [0, 0], [0, 0]]]")
 run_test(tensor6.tensor, [[[8, 6], [3, 5]], [[9, 1], [0, 0]], [[0, 0], [0, 0]], 
-                         [[0, 0], [0, 0]], [[0, 0], [0, 0]], [[0, 0], [2, 7]]], """Six sets of two sets of two data: [[[0, 0], [0, 0]], [[0, 0], [0, 0]], 
-                                                                                                                      [[0, 0], [0, 0]], [[0, 0], [0, 0]], 
-                                                                                                                      [[0, 0], [0, 0]], [[0, 0], [0, 0]]]""")
+                         [[0, 0], [0, 0]], [[0, 0], [0, 0]], [[0, 0], [2, 7]]], "Six sets of two sets of two data: \n[[[0, 0], [0, 0]], [[0, 0], [0, 0]], \n[[0, 0], [0, 0]], [[0, 0], [0, 0]], \n[[0, 0], [0, 0]], [[0, 0], [0, 0]]]")
 
 
