@@ -139,34 +139,67 @@
 #         return head + result
 
 # print(list_sum_recursive([4, 9, 10]))
+0, 0, 0, 0, 
 
 
-data = [8, 6, 3, 5, 9, 1]
-shape = 2
+data = [8, 6, 3, 5, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7]
+shape = [2, 3, 4]
 new_lst = []
 
-def nesting_data(data, shape, new_lst):
+# def nesting_data(data, shape, new_lst):
 
-    if len(data) == 0:
-        return new_lst
+#     # works with nesting single digit shape 
 
-    another = []
-    # for i in range(shape):
-    for item in data[:shape]:
-        # print(item, "item", data[:shape], "data[:shape]")
-        another.append(item)
-        # print(another, "another")
-    
-    new_lst.append(another)
-    # print(new_lst, "new list")
-    data = data[shape:]
-    # print(data, "data")
+#     if len(shape) == 0:
+#         return new_lst
+
+#     head = int(shape[0])
         
-    nesting_data(data, shape, new_lst)
+#     another = []
+#     # for i in range(shape):
+#     for item in data[:head]:
+#         # print(item, "item", data[:shape], "data[:shape]")
+#         another.append(item)
+#         # print(another, "another")
+    
+#     new_lst.append(another)
+#     # print(new_lst, "new list")
+#     data = data[head:]
+#     # print(data, "data")
+#     shape = shape[1:]
+#     print(shape, "shape")
+        
+#     nesting_data(data, shape, new_lst)
 
-    return new_lst
+#     return new_lst
 
-print(nesting_data(data, shape, new_lst))
+
+
+def nesting_data(data, shape):
+
+    if len(shape) == 1:
+        return data
+
+    main_lst = []
+    head = int(shape[0])
+    i = 0
+    while len(main_lst) < (len(data)/ head):
+
+        
+        new_lst = []
+        for item in data[i:head+i]:
+            new_lst.append(item)
+        i += head
+        main_lst.append(new_lst)
+
+    data = main_lst
+    shape = shape[1:]
+    
+
+    return nesting_data(data, shape)
+
+
+print(nesting_data(data, shape))
 
 
 # for num in shape
