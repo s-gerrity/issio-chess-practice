@@ -5,30 +5,39 @@ class Tensor():
     def __init__(self, data, shape):
         self.data = data
         self.shape = shape
-        #
+        # Grab the multiplicative identity of the shape (total data elements required)
         accumulated_total = self.multiply_list(shape)
+        # Confirm data length and edit as needed
         new_data = self.confirm_data_length(data, accumulated_total)
+        # Create tensor
         self.tensor = self.shape_data(new_data, shape)
 
-
-    def confirm_data_length(self, data, accumulated_total):
+    # @method: confirm_data_length
+    # Takes in self, list, integer
+    # Returns: list
+    # Counts elements in data list, compares to 
+    def confirm_data_length(self, data, data_length_needed):
         data_length = len(data)
 
-        if data_length == accumulated_total:
+        if data_length == data_length_needed:
             return data
 
-        elif data_length < accumulated_total:
-            amount_of_data_needed = accumulated_total - data_length
+        elif data_length < data_length_needed:
+            amount_of_data_needed = data_length_needed - data_length
             for i in range(amount_of_data_needed):
                 data.append(0)
         else:
-            amount_of_data_over =  data_length - accumulated_total
+            amount_of_data_over =  data_length - data_length_needed
             data = data[:-amount_of_data_over]
     
         return data
 
-
+    # @method: multiply_list_recursively
+    # Takes in self, list, and integer
+    # Returns: integer
+    # Multiplies each num in shape to get total length of data list needed to make tensor
     def multiply_list_recursively(self, current_nums, accumulated_total):
+        
         # Base case
         # Return the final state
         if len(current_nums) == 0:
@@ -55,6 +64,7 @@ class Tensor():
         # Base case
         # Return the final state
         if len(shape) == 1:
+            print(data, "data")
             return data
 
         main_lst = []
@@ -92,7 +102,7 @@ data_24 = [8, 6, 3, 5, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 
 data4 = [55, 66, 34, 98]
 data3 = [678, 333, 909]
 data6 = [0, 89, 0.4, 37, 988887, 2]
-data5 = [44, 59, 383, 6]
+data5 = [44, 59, 383, 6, 0.6]
 
 
 shape4 = [4]
@@ -109,6 +119,8 @@ tensor3 = Tensor(data6, shape23)
 tensor4 = Tensor(data6, shape123)
 tensor5 = Tensor(data_24, shape234)
 tensor6 = Tensor(data_24, shape226)
+tensor7 = Tensor(data5, shape123)
+tensor8 = Tensor(data_24, shape123)
 
 # Test function
 def run_test(testValue, expectedResult, description):
@@ -129,5 +141,7 @@ run_test(tensor5.tensor, [[[8, 6], [3, 5], [9, 1]],
                           [[0, 0], [0, 0], [2, 7]]], "Four sets of three sets of two data: \n[[[0, 0], [0, 0], [0, 0]], \n[[0, 0], [0, 0], [0, 0]], \n[[0, 0], [0, 0], [0, 0]], \n[[0, 0], [0, 0], [0, 0]]]")
 run_test(tensor6.tensor, [[[8, 6], [3, 5]], [[9, 1], [0, 0]], [[0, 0], [0, 0]], 
                          [[0, 0], [0, 0]], [[0, 0], [0, 0]], [[0, 0], [2, 7]]], "Six sets of two sets of two data: \n[[[0, 0], [0, 0]], [[0, 0], [0, 0]], \n[[0, 0], [0, 0]], [[0, 0], [0, 0]], \n[[0, 0], [0, 0]], [[0, 0], [0, 0]]]")
+run_test(tensor7.tensor, [[[44], [59]], [[383], [6]], [[0.6], [0]]], "Data is short 1 element, add a 0")
+run_test(tensor8.tensor, [[[8], [6]], [[3], [5]], [[9], [1]]], "Data has extra elements, cut off at shape limit of 6 elements")
 
 
