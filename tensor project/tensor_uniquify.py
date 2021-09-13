@@ -15,17 +15,23 @@ class Tensor():
     # @method: confirm_data_length
     # Takes in self, list, integer
     # Returns: list
-    # Counts elements in data list, compares to 
+    # Counts elements in data list, compares to length needed for tensor. Fills 
+    # with zeros to meet length when short, cuts off at needed limit if too long. 
+    # Returns as is if equal.
     def confirm_data_length(self, data, data_length_needed):
         data_length = len(data)
 
+        # Returns as is if equal
         if data_length == data_length_needed:
             return data
 
+        # Fills with zeros to meet length when short
         elif data_length < data_length_needed:
             amount_of_data_needed = data_length_needed - data_length
             for i in range(amount_of_data_needed):
                 data.append(0)
+
+        # Cuts off at needed limit if too long
         else:
             amount_of_data_over =  data_length - data_length_needed
             data = data[:-amount_of_data_over]
@@ -91,7 +97,6 @@ class Tensor():
         
 
         return self.shape_data(data, shape)
-
 
 
 
