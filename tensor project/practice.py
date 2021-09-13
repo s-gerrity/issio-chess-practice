@@ -95,28 +95,6 @@
 # print(multiply_list_recursively([6, 6, 6], 1))
 
 
-# # tensor shape - 2, 3
-# [[0, 0], [0, 0], [0, 0]]
-# shape = [2, 3, 2]
-# result_lst = []
-
-# def shaping_data(shape, result_lst):
-
-#     if len(shape) == 0:
-#         return result_lst
-    
-#     else:
-#         head = shape[0]
-#         shape
-#         return shaping_data(shape, result_lst.append(head))
-    
-
-# print(shaping_data(shape, result_lst))
-
-
-
-
-
 # def list_sum_recursive(input_list):
 #     # Base case
 #     print(input_list, "1 input")
@@ -139,40 +117,10 @@
 #         return head + result
 
 # print(list_sum_recursive([4, 9, 10]))
-0, 0, 0, 0, 
 
 
 data = [8, 6, 3, 5, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7]
 shape = [2, 3, 4]
-new_lst = []
-
-# def nesting_data(data, shape, new_lst):
-
-#     # works with nesting single digit shape 
-
-#     if len(shape) == 0:
-#         return new_lst
-
-#     head = int(shape[0])
-        
-#     another = []
-#     # for i in range(shape):
-#     for item in data[:head]:
-#         # print(item, "item", data[:shape], "data[:shape]")
-#         another.append(item)
-#         # print(another, "another")
-    
-#     new_lst.append(another)
-#     # print(new_lst, "new list")
-#     data = data[head:]
-#     # print(data, "data")
-#     shape = shape[1:]
-#     print(shape, "shape")
-        
-#     nesting_data(data, shape, new_lst)
-
-#     return new_lst
-
 
 
 def nesting_data(data, shape):
@@ -200,10 +148,3 @@ def nesting_data(data, shape):
 
 
 print(nesting_data(data, shape))
-
-
-# for num in shape
-# make new list
-# go through data and add that many items to new list
-# remove those items from the data list
-# 

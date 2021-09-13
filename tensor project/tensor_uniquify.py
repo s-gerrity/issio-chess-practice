@@ -21,9 +21,6 @@
 # edit shape to be shorter, cutting off the first index bc we've already looped it
 # call youself function with the new shape and new result
 
-# shape 1, 2, 3
-[[[], []], [[], []], [[], []]]
-
 
 class Tensor():
 
@@ -73,6 +70,12 @@ class Tensor():
 
 # Test data inputs
 data_24 = [8, 6, 3, 5, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7]
+data4 = [55, 66, 34, 98]
+data3 = [678, 333, 909]
+data6 = [0, 89, 0.4, 37, 988887, 2]
+
+
+
 shape4 = [4]
 shape13 = [1, 3]
 shape23 = [2, 3]
@@ -85,7 +88,7 @@ shape226 = [2, 2, 6]
 # tensor2 = Tensor(data_none, shape13)
 # tensor3 = Tensor(data_none, shape23)
 # tensor4 = Tensor(data_none, shape123)
-tensor5 = Tensor(data_24, shape226)
+tensor5 = Tensor(data_24, shape234)
 # tensor6 = Tensor(data_24, shape226)
 
 # Test function
@@ -97,10 +100,16 @@ def run_test(testValue, expectedResult, description):
         print('    ❌ Test failed!')
 
 # Tests
-# run_test(tensor1.tensor, [0, 0, 0, 0], "4 zeroes")
-# run_test(tensor2.tensor, [[0], [0], [0]], "Three sets of zero")
-# run_test(tensor3.tensor, [[0, 0], [0, 0], [0, 0]], "Three sets of two zeroes")
-# run_test(tensor4.tensor, [[[0], [0]], [[0], [0]], [[0], [0]]], "Three sets of two sets of single zeroes")
+# run_test(tensor1.tensor, [0, 0, 0, 0], "4 data: [0, 0, 0, 0]")
+# run_test(tensor2.tensor, [[0], [0], [0]], "Three sets of data: [[0], [0], [0]]")
+# run_test(tensor3.tensor, [[0, 0], [0, 0], [0, 0]], "Three sets of two data: [[0, 0], [0, 0], [0, 0]]")
+# run_test(tensor4.tensor, [[[0], [0]], [[0], [0]], [[0], [0]]], "Three sets of two sets of single data: [[[0], [0]], [[0], [0]], [[0], [0]]]")
+# run_test(tensor5.tensor, [[[0, 0], [0, 0], [0, 0]], 
+#                           [[0, 0], [0, 0], [0, 0]], 
+#                           [[0, 0], [0, 0], [0, 0]], 
+#                           [[0, 0], [0, 0], [0, 0]]], "Four sets of three sets of two data")
+# run_test(tensor6.tensor, [[[0, 0], [0, 0]], [[0, 0], [0, 0]], 
+#                           [[0, 0], [0, 0]], [[0, 0], [0, 0]], 
+#                           [[0, 0], [0, 0]], [[0, 0], [0, 0]]], "Six sets of two sets of two data")
 
 
-print(tensor5.tensor)
