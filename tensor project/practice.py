@@ -78,6 +78,30 @@
   
 # # print(flatten(['a', ['b', ['c', ['d']], 'e'], 'f']))
 
+data7 = [0, 89, 0.4, 37, 988887, 2, 99]
+data6 = [0, 89, 0.4, 37, 988887, 2]
+data5 = [44, 59, 383, 6]
+shape23 = [2, 3]
+
+def confirm_data_length(data, accumulated_total):
+    data_length = len(data)
+
+    if data_length == accumulated_total:
+        return print("looks good!")
+    elif data_length < accumulated_total:
+        amount_of_data_needed = accumulated_total - data_length
+        for i in range(amount_of_data_needed):
+            data.append(0)
+    else:
+        amount_of_data_over =  data_length - accumulated_total
+        data = data[:-amount_of_data_over]
+    
+    return data
+
+    
+
+print(confirm_data_length(data7, 6))
+
 
 # def multiply_list_recursively(current_nums, accumulated_total):
 #     # Base case
@@ -92,7 +116,13 @@
 #         current_nums.remove(current_number)
 #         return multiply_list_recursively(current_nums, accumulated_total * current_number)
 
-# print(multiply_list_recursively([6, 6, 6], 1))
+# def multiply_list(numbers):
+#     # Use our recursive method to multiply each number in this list together.
+#     # We pass 1 as the `accumulated_total` since that is the multiplicative
+#     # identity.
+#     return multiply_list_recursively(numbers, 1)
+
+# print(multiply_list(shape23))
 
 
 # def list_sum_recursive(input_list):
@@ -119,32 +149,32 @@
 # print(list_sum_recursive([4, 9, 10]))
 
 
-data = [8, 6, 3, 5, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7]
-shape = [2, 3, 4]
+# data = [8, 6, 3, 5, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7]
+# shape = [2, 3, 4]
 
 
-def nesting_data(data, shape):
+# def nesting_data(data, shape):
 
-    if len(shape) == 1:
-        return data
+#     if len(shape) == 1:
+#         return data
 
-    main_lst = []
-    head = int(shape[0])
-    i = 0
-    while len(main_lst) < (len(data)/ head):
+#     main_lst = []
+#     head = int(shape[0])
+#     i = 0
+#     while len(main_lst) < (len(data)/ head):
 
         
-        new_lst = []
-        for item in data[i:head+i]:
-            new_lst.append(item)
-        i += head
-        main_lst.append(new_lst)
+#         new_lst = []
+#         for item in data[i:head+i]:
+#             new_lst.append(item)
+#         i += head
+#         main_lst.append(new_lst)
 
-    data = main_lst
-    shape = shape[1:]
+#     data = main_lst
+#     shape = shape[1:]
     
 
-    return nesting_data(data, shape)
+#     return nesting_data(data, shape)
 
 
-print(nesting_data(data, shape))
+# print(nesting_data(data, shape))
