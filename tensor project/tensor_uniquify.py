@@ -41,7 +41,7 @@ class Tensor():
     # @method: multiply_list_recursively
     # Takes in self, list, and integer
     # Returns: integer
-    # Multiplies each num in shape to get total length of data list needed to make tensor
+    # Multiplies each num in shape to get total length of data list needed to make tensor.
     def multiply_list_recursively(self, current_nums, accumulated_total):
         
         # Base case
@@ -56,10 +56,12 @@ class Tensor():
             current_nums = current_nums[1:]
             return self.multiply_list_recursively(current_nums, accumulated_total * current_number)
 
+    # @method: multiply_list
+    # Takes in self and list
+    # Returns recursive call to multiply_list_recursively with list and hard-coded 1 int
+    # To start using our recursive method to multiply each number in the list together,
+    # pass 1 as the 'accumulated_total' since that is the multiplicative identity.
     def multiply_list(self, numbers):
-        # Use our recursive method to multiply each number in this list together.
-        # We pass 1 as the 'accumulated_total' since that is the multiplicative
-        # identity.
 
         return self.multiply_list_recursively(numbers, 1)
 
@@ -68,14 +70,14 @@ class Tensor():
     # Take in data to transform into a tensor. The shape determines how
     # the data is structured inside the object.
     def shape_data(self, data, shape):
-        # Exit if there is no shape
+
+        # Return empty list if there is no shape
         if len(shape) == 0:
             return []
 
         # Base case
         # Return the final state
         if len(shape) == 1:
-            print(data, "data")
             return data
 
         main_lst = []
