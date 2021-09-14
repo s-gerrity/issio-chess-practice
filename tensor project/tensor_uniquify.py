@@ -5,7 +5,7 @@ class Tensor():
     def __init__(self, data, shape):
         self.data = data
         self.shape = shape
-        # Grab the multiplicative identity of the shape (total data elements required)
+        # Grab the total data elements required for tensor
         accumulated_total = self.multiply_list(shape)
         # Confirm data length and edit as needed
         new_data = self.confirm_data_length(data, accumulated_total)
@@ -58,8 +58,9 @@ class Tensor():
 
     def multiply_list(self, numbers):
         # Use our recursive method to multiply each number in this list together.
-        # We pass 1 as the `accumulated_total` since that is the multiplicative
+        # We pass 1 as the 'accumulated_total' since that is the multiplicative
         # identity.
+
         return self.multiply_list_recursively(numbers, 1)
 
 
@@ -67,6 +68,10 @@ class Tensor():
     # Take in data to transform into a tensor. The shape determines how
     # the data is structured inside the object.
     def shape_data(self, data, shape):
+        # Exit if there is no shape
+        if len(shape) == 0:
+            return []
+
         # Base case
         # Return the final state
         if len(shape) == 1:
@@ -102,14 +107,16 @@ class Tensor():
 
 ######### Instantiation & Testing ############
 
-# Test data inputs
-data_24 = [8, 6, 3, 5, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7]
+
+# Test inputs
+data0 = [0]
+data24 = [8, 6, 3, 5, 9, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7]
 data4 = [55, 66, 34, 98]
 data3 = [678, 333, 909]
 data6 = [0, 89, 0.4, 37, 988887, 2]
 data5 = [44, 59, 383, 6, 0.6]
 
-
+shape0 = []
 shape4 = [4]
 shape13 = [1, 3]
 shape23 = [2, 3]
@@ -117,15 +124,19 @@ shape123 = [1, 2, 3]
 shape234 = [2, 3, 4]
 shape226 = [2, 2, 6]
 
+
 # Create tensor objects
 tensor1 = Tensor(data4, shape4)
 tensor2 = Tensor(data3, shape13)
 tensor3 = Tensor(data6, shape23)
 tensor4 = Tensor(data6, shape123)
-tensor5 = Tensor(data_24, shape234)
-tensor6 = Tensor(data_24, shape226)
+tensor5 = Tensor(data24, shape234)
+tensor6 = Tensor(data24, shape226)
 tensor7 = Tensor(data5, shape123)
-tensor8 = Tensor(data_24, shape123)
+tensor8 = Tensor(data24, shape123)
+tensor9 = Tensor(data24, shape0)
+tensor10 = Tensor(data0, shape13)
+
 
 # Test function
 def run_test(testValue, expectedResult, description):
@@ -134,6 +145,7 @@ def run_test(testValue, expectedResult, description):
         print('    ✅ Test passed')
     else:
         print('    ❌ Test failed!')
+
 
 # Tests
 run_test(tensor1.tensor, [55, 66, 34, 98], "4 data: [0, 0, 0, 0]")
@@ -148,5 +160,5 @@ run_test(tensor6.tensor, [[[8, 6], [3, 5]], [[9, 1], [0, 0]], [[0, 0], [0, 0]],
                          [[0, 0], [0, 0]], [[0, 0], [0, 0]], [[0, 0], [2, 7]]], "Six sets of two sets of two data: \n[[[0, 0], [0, 0]], [[0, 0], [0, 0]], \n[[0, 0], [0, 0]], [[0, 0], [0, 0]], \n[[0, 0], [0, 0]], [[0, 0], [0, 0]]]")
 run_test(tensor7.tensor, [[[44], [59]], [[383], [6]], [[0.6], [0]]], "Data is short 1 element, add a 0")
 run_test(tensor8.tensor, [[[8], [6]], [[3], [5]], [[9], [1]]], "Data has extra elements, cut off at shape limit of 6 elements")
-
-
+run_test(tensor9.tensor, [], "Shape is empty, return empty list: []")
+run_test(tensor10.tensor, [[0], [0], [0]], "Data is empty, return three sets of single zeroes: [[0], [0], [0]]")
