@@ -15,7 +15,7 @@ class Tensor():
     # @method: confirm_data_length
     # Takes in self, list, integer
     # Returns: list
-    # Counts elements in data list, compares to length needed for tensor. Fills 
+    # Counts elements in data list, compares to length needed for a tensor. Fills 
     # with zeros to meet length when short, cuts off at needed limit if too long. 
     # Returns as is if equal.
     def confirm_data_length(self, data, data_length_needed):
@@ -41,7 +41,7 @@ class Tensor():
     # @method: multiply_list_recursively
     # Takes in self, list, and integer
     # Returns: integer
-    # Multiplies each num in shape to get total length of data list needed to make tensor.
+    # Multiplies each num in shape to get the total length of the data list needed to make a tensor.
     def multiply_list_recursively(self, current_nums, accumulated_total):
         
         # Base case
@@ -91,7 +91,7 @@ class Tensor():
             
             new_lst = []
 
-            # Only iterate through the data list begining after the last element 
+            # Only iterate through the data list beginning after the last element 
             # added. Only iterate up until the head. 
             for item in data[i:head+i]:
                 new_lst.append(item)
