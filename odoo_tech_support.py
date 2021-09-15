@@ -153,4 +153,58 @@ def recursively_sum_lower_vowels_in_string(string, a_weight, e_weight, i_weight,
     return recursively_sum_lower_vowels_in_string(string, a_weight, e_weight, i_weight, o_weight, u_weight, sum_total)
 
 
-print(recursively_sum_lower_vowels_in_string("Welcome to Indonesia", 1, 2, 3, 4, 5, 0)) # OUTPUT 22
+# print(recursively_sum_lower_vowels_in_string("Welcome to Indonesia", 1, 2, 3, 4, 5, 0)) # OUTPUT 22
+
+
+# Problem 5:
+# Write a regular expression to find any word between 4 and 9 letters long and containing either “odoo”, “code” or “work”?
+
+
+
+# FrontEnd Challange (JS/TS/CSS)
+# ========================================
+
+# Problem 6:
+# https://gist.github.com/sna-odoo/70229f8bc4c3a232324b3c70ca9d2e6b
+# Create a 3*3 box using flex property, For each box it should display zero as the count in the center
+
+# Problem 7:
+# Extend the above feature by implementing the counter feature, the count has to be incremented only for the clicked box .
+
+# Problem 8:
+# Extend the above feature by creating a "click here" button and upon clicking the button the count of all the boxes has to increment by 1 with 1 second gap for each increment.
+
+# Problem 9:
+# Find count of 'odoo.sh' word in all sections of https://www.odoo.sh/faq webpage including collapsible divs using jquery.
+
+
+
+# Problem 10:
+# Write SQL statements to create database tables to store the details of users of a basic ecommerce website.
+# 10.1) Each user has a first name, last name, address and city id to store parent reference. City table has id and name column.
+
+# With the Fact that these tables are populated with 10000 users and 30 cities.
+# 10.2) Write a SQL query to find cities with highest number of users and reutrn city id,name and number users in descending order.
+# 10.3) How would you populate the tables with ramdon test datas for a tables created at problem 1.
+
+
+CREATE TABLE cities (
+  city_id SERIAL INT NOT NULL PRIMARY KEY,
+  city VARCHAR(20) NOT NULL,
+
+);
+
+# Each user has a 
+# first name, 
+# last name, address and 
+# city id to store parent reference
+
+CREATE TABLE users (
+  user_id SERIAL INT PRIMARY KEY,
+  address VARCHAR(20) NOT NULL,
+  fname VARCHAR(20) NOT NULL
+  lname VARCHAR(20) NOT NULL
+  city_id INT
+    REFERENCES(Cities)
+  
+);
