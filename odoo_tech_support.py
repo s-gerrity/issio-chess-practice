@@ -94,37 +94,6 @@ shuffle_deck(['A',1,2,3,4,5,6,7,8,9,10,'J','K','Q'])
 # if the item is a, increase counter and add the weight sum to total sum
 # loop and return sum total
 
-# Function sum_lower_vowels_in_string
-# Takes in string and 5 integers
-# Returns interger
-# We check each letter in the string to sum a total of how many lowercase vowels there 
-# according to that vowels specified weight in the argument 
-def sum_lower_vowels_in_string(string, a_weight, e_weight, i_weight, o_weight, u_weight):
-
-    if len(string) == 0:
-        return sum_total
-
-    sum_total = 0
-    head = string[0]
-
-    if head in'aeiou':
-        if head == 'a':
-            sum_total += 1 * a_weight
-        if head == 'e':
-            sum_total += 1 * e_weight
-        if head == 'i':
-            sum_total += 1 * i_weight
-        if head == 'o':
-            sum_total += 1 * o_weight
-        if head == 'u':
-            sum_total += 1 * u_weight
-    string = string[1:]
-
-    return sum_total
-
-
-print(sum_vowels_in_string("Welcome to Indonesia", 1, 2, 3, 4, 5)) # OUTPUT 22
-
 
 # Function sum_lower_vowels_in_string
 # Takes in string and 5 integers
@@ -152,4 +121,36 @@ def sum_lower_vowels_in_string(string, a_weight, e_weight, i_weight, o_weight, u
     return sum_total
 
 
-print(sum_vowels_in_string("Welcome to Indonesia", 1, 2, 3, 4, 5)) # OUTPUT 22
+# print(sum_lower_vowels_in_string("Welcome to Indonesia", 1, 2, 3, 4, 5)) # OUTPUT 22
+
+# Function recursively_sum_lower_vowels_in_string
+# Takes in string and 6 integers (Added parameter for `sum_total`)
+# Returns integer
+# We check the first letter in the string. If it is a vowel, we sum a total of how many lowercase vowels there 
+# according to that vowels specified weight in the argument. When the first letter has been checked, we 
+# move down the string recursively to check the next first letter. 
+def recursively_sum_lower_vowels_in_string(string, a_weight, e_weight, i_weight, o_weight, u_weight, sum_total):
+
+    if len(string) == 0:
+        return sum_total
+
+    head = string[0]
+    if head in'aeiou':
+        if head == 'a':
+            sum_total += 1 * a_weight
+        if head == 'e':
+            sum_total += 1 * e_weight
+        if head == 'i':
+            sum_total += 1 * i_weight
+        if head == 'o':
+            sum_total += 1 * o_weight
+        if head == 'u':
+            sum_total += 1 * u_weight
+    # Move to start with next letter in the string
+    string = string[1:]
+
+
+    return recursively_sum_lower_vowels_in_string(string, a_weight, e_weight, i_weight, o_weight, u_weight, sum_total)
+
+
+print(recursively_sum_lower_vowels_in_string("Welcome to Indonesia", 1, 2, 3, 4, 5, 0)) # OUTPUT 22
