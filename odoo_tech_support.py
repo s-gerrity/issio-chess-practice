@@ -188,23 +188,23 @@ def recursively_sum_lower_vowels_in_string(string, a_weight, e_weight, i_weight,
 # 10.3) How would you populate the tables with ramdon test datas for a tables created at problem 1.
 
 
-CREATE TABLE cities (
-  city_id SERIAL INT NOT NULL PRIMARY KEY,
-  city VARCHAR(20) NOT NULL,
+# CREATE TABLE cities (
+#   city_id SERIAL INT NOT NULL PRIMARY KEY,
+#   city VARCHAR(20) NOT NULL,
 
-);
+# );
 
-# Each user has a 
-# first name, 
-# last name, address and 
-# city id to store parent reference
+# # Each user has a 
+# # first name, 
+# # last name, address and 
+# # city id to store parent reference
 
-CREATE TABLE users (
-  user_id SERIAL INT PRIMARY KEY,
-  address VARCHAR(20) NOT NULL,
-  fname VARCHAR(20) NOT NULL
-  lname VARCHAR(20) NOT NULL
-  city_id INT
-    REFERENCES(Cities)
+# CREATE TABLE users (
+#   user_id SERIAL INT PRIMARY KEY,
+#   address VARCHAR(20) NOT NULL,
+#   fname VARCHAR(20) NOT NULL
+#   lname VARCHAR(20) NOT NULL
+#   city_id INT
+#     REFERENCES(Cities)
   
-);
+# );
